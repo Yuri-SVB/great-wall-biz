@@ -1,32 +1,499 @@
-% 08-market-opportunity.tex - Total addressable market analysis
+% 08-market-opportunity.tex - Three-segment market sizing (three units, never summed)
+%
+% STRUCTURAL RULE: S1 is counted in INDIVIDUALS, S2 in INSTITUTIONS and S3 in
+% COMPANIES. Those counts are never added together. Only annual platform
+% revenue in dollars is summed across segments.
+%
+% Every figure below is either (a) expanded from a macro in values/variables.tex
+% or (b) carries a citation. Assumptions that research could NOT source are
+% marked with a TODO(SOURCE) comment immediately above the sentence that uses
+% them, and are also flagged in the visible text.
 
-\section{Total Addressable Market}
+\section{Market Opportunity}
+
+The previous version of this section summed four heterogeneous populations---%
+Bitcoin holders, password-manager users, physical-vault owners and private-security
+customers---into a single \numint{9000000}-person ``subscriber'' market. That sum was
+dimensionally meaningless: it added people who would buy four different products, at
+four different prices, through four different channels. It has been replaced by three
+segments, each with its own unit of count, its own ARPU and its own penetration
+assumption. \textbf{The three headcounts are never added together.} The only quantity
+that is legitimately comparable across them is annual platform revenue in dollars.
+
+\subsection{Segment Structure}
 
 \begin{table}[H]
 \centering
-\begin{tabularx}{\linewidth}{l Y Y Y}
+\begin{tabularx}{\linewidth}{l l Y Y Y}
 \toprule
-Market Segment & Global TAM & Serviceable (SAM) & Target Share \\\midrule
-Subscription Users & \numint{\tamSubsGlobal}\cite{chainalysis2024,triple2023,statista2024pwd,lastpass2024} & \numint{\samSubs} & \num{\targetShareSubs}\% (\num{\targetSubsCountk}k) \\
+Segment & Unit & TAM & SAM & Platform Rev.\ at SAM \\\midrule
+S1 --- B2C marketplace & individuals & \numint{\tamSegOneIndividuals} & \numint{\samSegOneIndividuals} & \$\num[round-precision=1]{\revSamSegOneM}M \\
+S2 --- B2B licensing & institutions & \numint{\tamSegTwoInstitutions} & \numint{\samSegTwoInstitutions} & \$\num[round-precision=1]{\revSamSegTwoM}M \\
+S3 --- B2B marketplace & companies & \numint{\tamSegThreeCompanies} & \numint{\samSegThreeCompanies} & \$\num[round-precision=1]{\revSamSegThreeM}M \\\midrule
+\textbf{Combined} & \textemdash & \textit{not summable} & \textit{not summable} & \textbf{\$\num[round-precision=1]{\revSamAllSegmentsM}M} \\
 \bottomrule
 \end{tabularx}
 \end{table}
-\textit{Note: TAM includes password manager users\cite{statista2024pwd,lastpass2024}, private security/insurance customers\cite{alliedmarket2023}, and physical vault users\cite{grandview2024,mordor2024} seeking digital alternatives. Merchandise buyers overlap with primary segments and serve as a community engagement tool and minor, non-projected revenue stream.}
+
+\noindent\textit{Units differ by row. The TAM and SAM columns cannot be totalled;
+the revenue column can, because dollars are the same unit in every row. ``Platform
+Rev.\ at SAM'' is the annual revenue accruing to Great Wall if the entire serviceable
+market were captured---an upper bound, not a forecast.}
+
+\subsection{Penetration and What Is Actually in the Projections}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\linewidth}{l Y Y Y l}
+\toprule
+Segment & Penetration of SAM & Customers at Plan & Annual Platform Rev.\ (exit ARR) & In Y1--Y3 P\&L? \\\midrule
+S1 & \num[round-precision=1]{\targetShareSegOne}\% \textit{(derived)} & \numint{\targetSubsSegOne} individuals & \$\num[round-precision=1]{\revPlanSegOneM}M & Yes --- books \$\num[round-precision=1]{\revPlanSegOneActualM}M collected \\
+S2 & \numint{\targetShareSegTwo}\% \textit{(illustrative)} & \numint{\targetInstSegTwo} institutions & \$\num[round-precision=1]{\revPlanSegTwoM}M & No \\
+S3 & \numint{\targetShareSegThree}\% \textit{(illustrative)} & \numint{\targetCompaniesSegThree} companies & \$\num[round-precision=1]{\revPlanSegThreeM}M & No \\\midrule
+\textbf{Combined} & \textemdash & \textit{not summable} & \textbf{\$\num[round-precision=1]{\revPlanAllSegmentsM}M} & \textemdash \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Two disclosures matter more than the numbers themselves:
+
+\begin{itemize}[nosep]
+  \item \textbf{S1's penetration is derived, not asserted.} The
+    \numint{\targetSubsSegOne} figure is \emph{exactly} the Year~3 subscriber count
+    produced by the financial model
+    (marketing budget $\div$ CAC, less churn), and \$\num[round-precision=1]{\revPlanSegOneM}M
+    is \emph{exactly} \texttt{subARRYearThree}. Market sizing and the P\&L can no
+    longer drift apart: the share is computed as
+    \numint{\targetSubsSegOne}~/~\numint{\samSegOneIndividuals}, not chosen.
+  \item \textbf{S2 and S3 contribute \$0 to the Year~1--3 projections.} The
+    \$\num[round-precision=1]{\revUpsideExcludedM}M attributable to them at the
+    illustrative penetrations above is upside that is deliberately excluded from
+    every revenue, COGS, gross-margin, LTV and valuation figure in this document.
+    Their unit economics differ structurally from S1 (see below), and blending them
+    into a single ARPU would reintroduce exactly the error this restructure removes.
+\end{itemize}
+
+% TODO(SOURCE): the 34.3% figure is arithmetic, but the TENSION it exposes is real
+% and unresolved. Consumer-software penetration benchmarks (Coinbase 15%, Stripe 20%,
+% LastPass/1Password 10-15%) sit well below it. Either the 15% TAM->SAM assumption is
+% too conservative, or the Year 3 marketing ramp is too aggressive. Do not present
+% 34.3% as benchmarked - it is not.
+\noindent\textbf{Flagged tension.} At \num[round-precision=1]{\targetShareSegOne}\% of
+S1 SAM, the Year~3 plan sits \emph{above} the consumer-software penetration benchmarks
+cited below. Either the \numint{\samPercentSegOne}\% TAM-to-SAM assumption is too
+conservative for this population, or the Year~3 marketing ramp is too aggressive for
+the market it addresses. This document does not resolve the tension; it surfaces it.
+
+\subsection{S1 --- Individuals Running Self-Hosted Time-Locks}
+
+\textbf{Unit: individuals. ARPU: \$\num{\arpuSegOneGrossMonthly}/month gross,
+\$\num{\arpuSegOneMonthly}/month net to the platform at a
+\numint{\markPlatformFeePercent}\% take rate.}
+
+The addressable population is individual, non-institutional holders of more than
+\$100{,}000 in Bitcoin who self-custody, and who therefore run a self-hosted time-lock
+whose delay is set by their own hardware rather than by the protocol minimum. The
+marketplace sells them \emph{speed}: the convenience ratio
+$R = C(H_{\max})/C(H_{\text{user}})$ is the factor by which outsourcing collapses a
+user's own multi-day solve into the protocol's minimum delay.
+
+\begin{itemize}[nosep]
+  \item \textbf{Population: \numint{\tamSegOneIndividuals} individuals}, holding an
+    average of \$\numint{\tamSegOneAvgHoldingUsd} for roughly
+    \$\numint{\tamSegOneAumBn}bn of protected assets. This replaces the previous
+    unsourced \numint{3000000} ``Bitcoin users'' figure and is consistent with the
+    companion economics paper.
+  \item \textbf{Derivation.} No source publishes a count of \emph{individuals}
+    holding more than \$100{,}000 in Bitcoin. Henley~\& Partners count
+    \numint{145100} Bitcoin millionaires worldwide\cite{henley2025crypto}; scaling
+    down one wealth decade using the address-level decade ratios observable on
+    chain---\numint{663495} addresses above \$100{,}000 and \numint{119804} above
+    \$1{,}000{,}000\cite{bitinfocharts2026}---yields a band of roughly
+    \numint{800000} to \numint{1155000} individuals.
+  \item \textbf{Context.} \numint{365000000} people owned Bitcoin at
+    end-2025\cite{cryptocom2026owners}, so this population is a fraction of one
+    percent of owners---consistent with the extreme wealth concentration reported
+    on chain\cite{chainalysis2024,triple2023}. Individuals control the majority of
+    circulating supply, with more than \$800bn held in self-custody against roughly
+    \$300bn in ETFs and corporate treasuries\cite{river2025custody}.
+\end{itemize}
+
+% TODO(SOURCE): 1,100,000 is the TOP of the 800k-1,155k band, not its midpoint. The
+% research base case is 950,000. The figure is carried at 1,100,000 only for
+% consistency with JUSTIFICATION.tex. Scaling individual-level counts using
+% ADDRESS-level decade ratios is an unvalidated methodological step.
+% TODO(SOURCE): no self-custody rate by wealth band exists in any source. S1 requires
+% self-custody and applies NO haircut for it, so the true core is below 1,100,000.
+% TODO(SOURCE): the $300,000 average holding is inherited from JUSTIFICATION.tex and
+% could not be independently verified; it implies ~22.8% of circulating supply.
+% TODO(SOURCE): the 15% TAM->SAM rate is carried over unchanged from the old flat
+% model and nothing was found to validate it for this population.
+\noindent\textbf{Unsourced inputs in S1 (flagged, not established):} the choice of
+\numint{\tamSegOneIndividuals} rather than the \numint{950000} research base case; the
+absence of any self-custody haircut; the \$\numint{\tamSegOneAvgHoldingUsd} average
+holding; the \numint{\samPercentSegOne}\% TAM-to-SAM rate; and the
+\numint{\subBasicMix}/\numint{\subMediumMix}/\numint{\subProfessionalMix}/\numint{\subGoldenMix}
+tier mix that produces the \$\num{\arpuSegOneGrossMonthly} weighted average price.
+
+\subsubsection*{Why the S1 Price Holds}
+
+Three independent tests, in increasing order of strength:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Direct comparable.} Casa sells recurring key-management security to
+    precisely this buyer at \$250/year (Standard) and \$2{,}100/year
+    (Premium)\cite{casa2026pricing}. Great Wall's
+    \$\numint{\arpuSegOneGrossMonthly * 12}/year sits inside that proven
+    corridor, nearer the entry tier.
+  \item \textbf{Assets under protection.} The annual price is
+    \numint{\arpuSegOneLoadBps} basis points of the anchor holder's
+    \$\numint{\tamSegOneAvgHoldingUsd} position---\emph{below} the 15--25~bps that
+    spot Bitcoin ETFs charge\cite{etffees2026}. A holder pays less per year for
+    coercion resistance than for the convenience of custody through an ETF, and the
+    ETF addresses the wrench attack not at all.
+  \item \textbf{Threat value.} At \numint{\arpuSegOneLoadBps}~bps the implied
+    break-even is roughly a \num{0.14}\% annual probability of total coercive loss,
+    against a risk backdrop in which US border device searches rose to
+    \numint{55318} in FY2025, up \num[round-precision=1]{32.4}\% over two years\cite{cbp2025searches},
+    with a record \numint{14899} devices searched in the April--June 2025
+    quarter\cite{fpf2025border}.
+\end{enumerate}
+
+\noindent Pricing is currently derived cost-plus (provider electricity cost, times a
+tier markup, grossed up for the platform fee), which has no relationship to the value
+of preventing a coerced transfer. For this population cost-plus almost certainly
+\emph{under}prices; a migration to value-based pricing denominated in basis points of
+protected assets is the natural forward path once real tier-mix data exists.
+
+\subsubsection*{Privacy and Travel: A Wedge, Not a Population}
+
+Border device searches are a low-probability, high-consequence event of exactly the
+shape a duress-resistant time-lock addresses: \numint{55318} devices searched in
+FY2025, of which \numint{13590} belonged to US citizens\cite{cbp2025searches}, against
+roughly \numint{419000000} traveller encounters. No source quantifies the overlap
+between international travellers and Bitcoin self-custodians, so this sub-population
+is carried at \textbf{zero additional headcount} and used as a conversion and
+messaging wedge inside the S1 core.
+
+% TODO(SOURCE): the overlap rate between international travellers and Bitcoin
+% self-custodians is COMPLETELY UNSOURCED. Any additive traveller population would be
+% a placeholder. It is deliberately carried at +0 here. Do not add one.
+% TODO(SOURCE): CBP counts DEVICES and EVENTS, not distinct people. The ~419M
+% traveller denominator comes from secondary reporting, not from cbp.gov directly.
+
+\subsubsection*{Journalists and Human Rights Defenders: Mission Reach at Zero ARPU}
+
+Roughly \numint{\segOneMissionReachJournalists} journalists are organised in
+professional unions worldwide\cite{ifj2026}; more than \numint{4000} requests for
+emergency digital-security assistance reached the Access Now helpline in a single
+year\cite{accessnow2025helpline}; \numint{330} journalists were jailed as of
+1~December 2025\cite{cpj2026census}. This population has revealed, documented demand
+for coercion resistance and \textbf{near-zero ability to pay}. It is modelled at an
+ARPU of \$\numint{\arpuSegOneMissionMonthly} as sponsored seats---a marketing or COGS
+line, never a revenue line---and is \textbf{not} added to any subscriber count. The
+entire global funder pool that could sponsor such seats is small: the Human Rights
+Foundation's Bitcoin Development Fund disburses rounds of roughly \$325{,}000 to
+\$455{,}000 across 12--26 projects\cite{hrf2025bdf}.
+
+% TODO(SOURCE): the ~600,000 IFJ figure is a UNION MEMBERSHIP count and is a floor,
+% not a population; no authoritative count of professional journalists worldwide
+% exists. There is no published count of human rights defenders at all.
+% TODO(SOURCE): any grant offset for sponsored seats (research suggested $50K-$250K/yr)
+% is an inference from observed HRF round sizes. Great Wall has no grant history and
+% no source supports that it would receive such funding. No grant revenue is modelled.
+
+\subsection{S2 --- Institutions Licensing Custodial TGPO}
+
+\textbf{Unit: institutions. ARPU: \$\numint{\arpuSegTwoAnnualLicence}/year licence plus
+a one-off \$\numint{\arpuSegTwoIntegrationFee} integration fee
+(\$\numint{\arpuSegTwoYearOneContract} first-year contract value).
+Marketplace revenue: \$\numint{\arpuSegTwoMarketplaceRevenue}.}
+
+In S2 the \emph{institution} imposes the delay on its own customers' outbound
+transfers. It follows structurally that S2 generates \textbf{no marketplace revenue
+whatsoever}: an institution that wants the delay to be real will never buy solving
+capacity to shortcut it. There is no gross transaction volume, no provider side, no
+\numint{\markPlatformFeePercent}\% take rate and no payment processing on gross.
+S2 economics are licence, seat and integration fees only.
+
+\subsubsection*{The Driver: Brazilian Pix and \textit{Sequestro Rel\^{a}mpago}}
+
+The strongest external validation for the entire product thesis is that the Brazilian
+central bank has \emph{already conceded that delay is the countermeasure}, and
+mandated it. Resolu\c{c}\~{a}o BCB n.\ 142 caps person-to-person transfers at
+R\$1{,}000 in the 20:00--06:00 window and requires a \textbf{minimum 24-hour period}
+before an increase to a transfer limit takes effect, while decreases take effect
+immediately\cite{bcb2021res142}. That is precisely the asymmetric time-lock semantics
+of TGPO---the action that reduces protection is delayed, the action that increases it
+is instant---imposed by regulation on every participant. The central bank's president
+described the motivating scenario in these terms: a victim of a
+\textit{sequestro rel\^{a}mpago} at 02:30 who is forced to make a transfer cannot cancel
+it, so transfers in those hours must be deferred to the following
+day\cite{cnnbrasil2021pix}.
+
+The ex-post remedy the regulator built instead is measurably failing. Of
+R\$\num[round-precision=2]{7.77}bn of \emph{confirmed-fraud} Pix value in 2025, only
+\num[round-precision=2]{8.96}\% was actually refunded (2024:
+\num[round-precision=2]{8.11}\%), the principal stated reason being insufficient
+balance---the money is already gone\cite{bcb2026med}. Recovery after a coerced instant
+transfer is roughly \numint{90}\% impossible, which is the entire argument for an
+ex-ante time-lock.
+
+The incidence is not marginal. A national victimisation survey found
+\num[round-precision=1]{0.8}\% of Brazilians aged 16+ reported suffering a
+\textit{sequestro rel\^{a}mpago} in the prior twelve months---\numint{1267167} people, up
+from \num[round-precision=1]{0.6}\% the previous edition---and identified coercion as
+the mechanism linking physical and digital crime, since the offender must now compel
+the victim to surrender credentials rather than simply take a
+device\cite{fbsp2025vitimizacao}. \numint{830890} mobile phones were stolen or robbed
+in Brazil in 2025, of which \numint{308723} were \textit{roubos}---taken by violence or
+threat, with the victim present and coercible\cite{fbsp2026anuario}.
+
+% TODO(SOURCE): the 1,267,167 figure is a SURVEY-BASED POPULATION PROJECTION from
+% self-reports, not a count of police reports. Official recorded counts are far lower
+% and were not retrieved. Expect an investor to push on that gap.
+
+\subsubsection*{Institution Counts}
+
+\begin{itemize}[nosep]
+  \item \textbf{Brazil: \numint{\tamSegTwoInstBrazil} active Pix participants} at
+    December 2025, up \num[round-precision=1]{5.6}\% year on year---a hard,
+    annually republished, regulator-published count of exactly the institutions that
+    could embed custodial TGPO\cite{bcb2026pixreport}.
+  \item \textbf{Colombia: \numint{\tamSegTwoInstColombia}} entities linked to Bre-B,
+    the interoperated instant-payment system\cite{banrep2026breb}.
+  \item \textbf{Argentina: \numint{\tamSegTwoInstArgentina}} registered payment
+    service providers offering payment accounts\cite{bcra2025pagos}.
+  \item \textbf{Mexico: \numint{\tamSegTwoInstMexico}}, being 50 authorised banks plus
+    89 authorised Financial Technology Institutions\cite{cnbv2026banca}.
+\end{itemize}
+
+\noindent SAM is cut to \numint{\samSegTwoInstitutions} independent buyers
+(\num[round-precision=1]{\samPercentSegTwo}\% of TAM) because the Pix participant
+count includes several hundred individual credit cooperatives that run on shared
+core-banking platforms and do not procure independently. Brazil alone contributes
+\numint{\samSegTwoInstBrazil} and is the beachhead.
+
+% TODO(SOURCE): the claim that credit cooperatives buy through shared centrals
+% (Sicoob, Sicredi, Ailos, Cresol, Unicred) rather than individually is UNSOURCED, and
+% it is what removes ~500 institutions from the 926. It materially drives the SAM.
+% TODO(SOURCE): the Brazil figure of 400 is arithmetic over three separately sourced
+% components (~141 banks in BCB's STR list, >200 authorised payment institutions,
+% ~60 SCD/SCFI) whose OVERLAP could not be verified. Only the 926 is a hard count.
+% TODO(SOURCE): BCB does not publish head counts of the 926 by segment. Chase the
+% IF.data / "Relacao de Instituicoes em Funcionamento" registry before this goes to an
+% investor. Peru, Chile, Ecuador and Central America were not sized at all.
+
+\subsubsection*{Licence Pricing}
+
+The \$\numint{\arpuSegTwoAnnualLicence} blend is anchored deliberately \emph{below}
+the two hardest available benchmarks. BioCatch---the closest true comparable, selling
+a single behavioural anti-fraud control to banks---finished 2025 with more than
+\$185M ARR across \numint{340} financial-institution customers, a mean of roughly
+\$\numint{544000} per institution\cite{biocatch2026}. At the top end, Caixa
+Econ\^{o}mica Federal's disclosed emergency contract for cloud facial-biometric
+authentication was R\$\num[round-precision=1]{8.1}M for 180
+days\cite{caixa2026biometria}, annualising to several million dollars for one control
+at one bank. Great Wall prices at roughly one-fifth of the BioCatch mean because
+custodial TGPO is one narrow, verifiable control---an enforced,
+cryptographically non-shortcuttable delay on the specific class of outbound transfer a
+coerced customer can be forced to authorise---not a fraud platform with models, case
+management and analyst tooling. It should price as a module, not a platform
+replacement.
+
+Two arguments support a defensible floor. First, the compliance hook: the regulator
+already mandates the mechanism\cite{bcb2021res142}, so the institution is buying a
+better implementation of an existing legal obligation, which prices more reliably
+than discretionary security spend. Second, loss avoidance: with roughly
+\num[round-precision=0]{9}\% of confirmed-fraud value recovered\cite{bcb2026med},
+system-wide unrecovered confirmed-fraud value ran in the billions of reais in 2025,
+against which a \$\numint{\arpuSegTwoAnnualLicence} licence is trivial for any
+institution carrying even a small share of that exposure.
+
+% TODO(SOURCE): NO public benchmark exists for what a bank pays for a coerced-transfer
+% or enforced-delay control specifically. Every benchmark found is for a broader
+% product. The step from BioCatch's $544K mean to $120K is a scope judgement.
+% TODO(SOURCE): the $75,000 integration fee has no sourced comparable at all.
+% TODO(SOURCE): the 10/100/290 tier split and $900K/$220K/$60K price points that blend
+% to $121K are constructed, not observed.
+% TODO(SOURCE): no evidence that any Brazilian institution today carries a budget line
+% for coerced-transfer delay as a discrete product. Willingness to pay is assumed.
+% TODO(SOURCE): the 8% five-year penetration is illustrative; no adoption curve for a
+% regulated-payments security module in LatAm was sourced.
+\noindent\textbf{Unsourced inputs in S2 (flagged, not established):} the scope
+discount from the BioCatch mean to \$\numint{\arpuSegTwoAnnualLicence}; the
+\$\numint{\arpuSegTwoIntegrationFee} integration fee; the internal tier ladder that
+blends to \$\numint{\arpuSegTwoBlendCheck}; the cooperative-procurement haircut; and
+the \numint{\targetShareSegTwo}\% penetration rate.
+
+\subsection{S3 --- Companies Buying Solving Capacity for Digital Assets}
+
+\textbf{Unit: companies. ARPU: \$\numint{\arpuSegThreeGrossMonthly}/month gross,
+\$\numint{\arpuSegThreeMonthly}/month net to the platform.}
+
+S3 sells outsourced puzzle-solving capacity to businesses protecting \emph{digital}
+assets: self-custodied treasury keys, signing credentials, vault and root secrets.
+Cryptographic delay is necessary only where all three of the following hold, and it is
+this filter---not the size of the retail sector---that determines the segment:
+
+\begin{enumerate}[nosep]
+  \item the protected asset is a \textbf{secret}, not a physical object, so no
+    enclosure can gate access to it;
+  \item the adversary may be an \textbf{insider} holding legitimate override
+    authority, so an override-capable lock is worthless;
+  \item the adversary may be the \textbf{vendor or custodian}, so no trusted third
+    party may hold a bypass.
+\end{enumerate}
+
+\noindent The documented failure modes are exactly these. Private-key compromise
+accounted for \num[round-precision=1]{43.8}\% of all crypto value stolen in 2024, the
+single largest attack vector, out of \$\num[round-precision=1]{2.2}bn
+stolen\cite{chainalysis2025hacks}. The largest exchange theft on record worked by
+compromising a multisig \emph{signing interface} rather than the keys, and a second
+nine-figure loss drained a multisig operated under a third-party custody
+arrangement\cite{wazirx2024hack}. No safe, timer or custodian override addresses any
+of those; a cryptographic delay does.
+
+\begin{itemize}[nosep]
+  \item \textbf{TAM: \numint{\tamSegThreeCompaniesLow}--\numint{\tamSegThreeCompaniesHigh}
+    companies worldwide} (modelled at \numint{\tamSegThreeCompanies}), dominated by
+    licensed crypto-asset service providers---more than \numint{7360} tracked across
+    75 countries\cite{thebanks2025vasp}.
+  \item \textbf{SAM: \numint{\samSegThreeCompanies} companies}, the Brazil-anchored
+    beachhead. \numint{12053} Brazilian organisations declared crypto on their balance
+    sheets\cite{receita2022cripto}, of which only the self-custodying subset is
+    addressable---just \num[round-precision=1]{7.6}\% of businesses fully self-custody,
+    and fewer than \numint{100} corporate bitcoin treasuries of meaningful size exist
+    anywhere\cite{river2025business}.
+  \item \textbf{Pricing} is bracketed between the S1 Golden tier
+    (\$\numint{\subGoldenPrice}/month, floor: a company runs more puzzles, more
+    signers and longer delays than one individual) and the verified
+    \$\num[round-precision=2]{435.56}/month Loomis SafePoint contract price
+    (ceiling---and that bundles armoured transport, cash counting and a loss
+    guarantee)\cite{loomis2016safepoint}. Model as a range of
+    \$\numint{\arpuSegThreeGrossMonthlyLow}--\$\numint{\arpuSegThreeGrossMonthlyHigh}
+    gross per month, not a point estimate.
+\end{itemize}
+
+\noindent\textbf{S3 does not scale with site count.} Treasury keys are held centrally,
+so a jewellery chain with forty stores buys one time-lock configuration, not forty---%
+unlike a time-delay safe, which is bought per site. Modelling S3 per-site would
+overstate its revenue by an order of magnitude. S3 is therefore a \textbf{high-ARPU,
+low-count, strategic} segment that validates the technology with demanding buyers and
+generates reference customers. It is not the volume engine; S1 is.
+
+% TODO(SOURCE): the product category HAS NO MARKET. No business has ever paid for
+% outsourced time-lock-puzzle solving, so every S3 ARPU figure is constructed by
+% analogy to adjacent products. There is no comparable transaction anywhere.
+% TODO(SOURCE): the 28% take rate is carried over from S1 with no B2B benchmark.
+% TODO(SOURCE): applies River's US 7.6% full-self-custody rate to Brazilian companies;
+% no Brazil-specific corporate custody split exists.
+% TODO(SOURCE): the 6,000 upper bound reads River's unquantified "most use a
+% third-party + self-custody hybrid" as roughly 50%. River publishes no such number.
+% TODO(SOURCE): the Receita Federal count (12,053) is from August 2022 and has NOT
+% been extrapolated forward, despite Brazil's VASP regime taking effect in 2026.
+% TODO(SOURCE): no conversion or penetration rate from addressable population to
+% paying customers can be estimated for a category that does not exist; the 10% used
+% is illustrative. No LatAm business counts outside Brazil were sourced.
+\noindent\textbf{Unsourced inputs in S3 (flagged, not established):} the
+\$\numint{\arpuSegThreeGrossMonthly} price point; the
+\numint{\markPlatformFeePercent}\% take rate applied to a B2B buyer; the transfer of a
+US self-custody rate to Brazil; the upper bound of the SAM range; the currency of the
+2022 Brazilian corporate-crypto count; and the
+\numint{\targetShareSegThree}\% penetration rate.
+
+\subsection{Existing-Market Comparable: Time-Delay Safes}
+
+The nearest thing to an existing market for this product is the \textbf{time-delay
+safe}: a mature, regulated, commercially successful product sold to convenience
+stores, pharmacies, fuel stations, supermarkets and lottery retailers, whose entire
+value proposition is that access is deliberately slowed and that the slowdown is
+\emph{advertised on the door}. It is the proof that a delay is a saleable good.
+
+\begin{itemize}[nosep]
+  \item \textbf{The deterrent effect is documented by regulators, not vendors.} After
+    Alberta mandated time-delayed safes in pharmacies, robberies fell from
+    \numint{89} to \numint{14} in Calgary and from \numint{39} to zero in Edmonton;
+    British Columbia recorded a \numint{94}\% decrease\cite{ocp2024safes}. Ontario
+    reported an \numint{82}\% decrease after full implementation across all community
+    pharmacies\cite{oacp2024safes}. A national US pharmacy chain reported a
+    \numint{50}\% decrease across 45 states\cite{cvssafes2015}.
+  \item \textbf{The effect depends on publishing the mechanism.} Every source
+    attributes the result to prominent signage plus sector-wide coverage, so that
+    offenders cannot shop for non-adopters\cite{ocp2024safes,cvssafes2015}. Florida
+    law goes further and \emph{requires} a conspicuous notice at the entrance
+    advertising that cash is limited\cite{flsenate812173}. This is direct empirical
+    support for Great Wall's anti-obscurity posture: the mechanism is published
+    precisely because publication is what deters.
+  \item \textbf{Businesses pay recurring fees for delay.} A publicly filed Loomis
+    SafePoint agreement prices delay-plus-service at
+    \$\num[round-precision=2]{435.56} per month per safe unit on a five-year
+    term\cite{loomis2016safepoint}.
+  \item \textbf{The category already exists in Brazil.} \textit{Cofres com retardo}
+    with configurable 1--99 minute delays are sold to fuel stations, pharmacies and
+    other commercial establishments explicitly to reduce losses in
+    \textit{assaltos rel\^{a}mpagos}\cite{importec2024retardo}; smart safes are adopted
+    by supermarkets, pharmacies, lottery retailers and fuel
+    stations\cite{prosegur2024cofres}. The broader safes-and-vaults market is
+    estimated in the single-digit billions of
+    dollars\cite{grandview2024,mordor2024}, and private protective services are a
+    separate multi-billion-dollar market serving the same
+    fear\cite{alliedmarket2023}.
+  \item \textbf{But the buyer population is smaller than it looks.} Brazilian
+    official statistics count \numint{10607110} companies and organisations, of which
+    only \numint{80142} have 50--249 employees---and in \emph{all} of retail only
+    \numint{7251} enterprises are that size\cite{ibge2024cempre}. Any model assuming
+    tens of thousands of mid-size Brazilian retail buyers is wrong.
+\end{itemize}
+
+% TODO(SOURCE): NO published market size exists for the TIME-DELAY segment
+% specifically, anywhere. The safes-and-vaults totals are proxies from secondary
+% research vendors whose 2025 estimates disagree by roughly 2x ($4.8bn to $9.13bn).
+% TODO(SOURCE): no source was found quantifying an insurance premium discount for
+% installing a time-delay safe. Vendors assert underwriting benefits without evidence.
+% Do not put a number on it.
+% TODO(SOURCE): the Loomis price is a single 2016 US municipal contract with a CPI
+% escalator, not a market average; the current equivalent is higher by an unknown amount.
+\noindent\textbf{Where the analogy stops, stated plainly.} Every deterrence statistic
+above was produced by cheap mechanical and electronic timers, not by any cryptographic
+construction. A business protecting cash or jewellery in a steel box has no use for
+sequential squaring: it buys a timer lock for a few hundred dollars, bolts it on, and
+is done. Those numbers justify the \emph{concept} of advertised delay; they do not by
+themselves establish a market for \emph{cryptographic} delay. That market exists only
+where the protected asset is a secret rather than an object---which is why S3 is scoped
+to digital assets and is deliberately small.
 
 \subsection{Market Share Benchmarks}
-The target market shares are based on comparable first-mover and strategic partnership successes:
-\begin{itemize}
-  \item \textbf{Subscription (\num{\targetShareSubs}\% of SAM):} Aligned with Coinbase's 15\% crypto exchange capture\cite{coinbase2021}, Stripe's 20\% payment processing share\cite{stripe2023}, and LastPass/1Password's 10-15\% password management penetration\cite{lastpass2023}
-  \item \textbf{Strategic Advantages:} Partnership with market leader provides distribution channels, brand credibility, and accelerated customer acquisition typically doubling organic growth rates\cite{reforge2022,hagiu2015}
+The S1 target share is derived from the financial model rather than asserted (see
+above). The following comparables are offered as context for \textbf{S1 only}:
+
+\begin{itemize}[nosep]
+  \item \textbf{Consumer penetration comparables:} Coinbase's 15\% crypto exchange
+    capture\cite{coinbase2021}, Stripe's 20\% payment processing
+    share\cite{stripe2023}, and LastPass/1Password's 10--15\% password management
+    penetration\cite{lastpass2023}.
+  \item \textbf{These do not transfer to S2 or S3.} Consumer-software penetration
+    curves say nothing about enterprise licence adoption in regulated payments (S2)
+    or about a B2B category that does not yet exist (S3). No benchmark is claimed for
+    either; their penetration rates are labelled illustrative in the table above.
+  \item \textbf{Strategic advantages:} Partnership with a market leader provides
+    distribution, brand credibility and accelerated acquisition, typically doubling
+    organic growth rates\cite{reforge2022,hagiu2015}.
 \end{itemize}
 
 \subsection{Market Dynamics}
-\begin{itemize}
-  \item \textbf{Bitcoin Adoption:} Growing mainstream adoption drives demand for security tools
-  \item \textbf{Self-Sovereignty Trend:} "Not your keys, not your coins" philosophy expanding market
-  \item \textbf{Privacy Concerns:} Increasing demand for anonymous computation services
-  \item \textbf{Underserved Market:} Limited competition in anonymous marketplace segment
-  \item \textbf{Adjacent Markets:} TAM includes password manager users seeking stronger security solutions\cite{statista2024pwd,lastpass2024}, customers of private security companies/violence insurance exploring digital alternatives\cite{alliedmarket2023}, and physical vault users transitioning to digital security\cite{grandview2024,mordor2024}
+\begin{itemize}[nosep]
+  \item \textbf{Bitcoin Adoption:} Growing mainstream adoption drives demand for
+    security tools
+  \item \textbf{Self-Sovereignty Trend:} ``Not your keys, not your coins'' philosophy
+    expanding the S1 base
+  \item \textbf{Regulatory Tailwind:} Central banks are already mandating delay as an
+    anti-coercion control\cite{bcb2021res142}, which converts S2 from discretionary
+    security spend into a compliance line
+  \item \textbf{Privacy Concerns:} Increasing demand for anonymous computation
+    services
+  \item \textbf{Underserved Market:} Limited competition in the anonymous marketplace
+    segment
 \end{itemize}
 
 \subsection{2025 Market Inflection}
@@ -47,7 +514,7 @@ This dynamic represents a significant tailwind for Great Wall. Rather than aband
 \subsection{Competitive Landscape}
 \begin{itemize}
   \item \textbf{Direct Competition:} Limited due to anonymous marketplace complexity
-  \item \textbf{Indirect Competition:} Traditional cloud computing lacks privacy features
+  \item \textbf{Indirect Competition:} Traditional cloud computing lacks privacy features; time-delay safes solve the physical case only and cannot gate a secret
   \item \textbf{Barriers to Entry:} Trust and reputation system creates moat
   \item \textbf{First-Mover Advantage:} Early provider network difficult to replicate
 \end{itemize}

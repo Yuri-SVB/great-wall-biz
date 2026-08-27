@@ -551,25 +551,266 @@
 \newcommand{\HCoptimisticValHigh}{27}
 
 % ============================================================================
-% SECTION 16: MARKET SIZING (TAM/SAM)
+% SECTION 16: MARKET SIZING (THREE SEGMENTS, THREE UNITS)
+% ============================================================================
+% STRUCTURAL RULE - READ BEFORE EDITING:
+%   The three segments are counted in THREE DIFFERENT UNITS
+%     S1 = individuals, S2 = institutions, S3 = companies
+%   and are therefore NEVER summed into a single "subscriber" figure. The
+%   previous model added Bitcoin users + password-manager users + vault users
+%   + private-security customers into one 9,000,000 "subscriber" TAM; that sum
+%   was dimensionally meaningless and has been removed.
+%
+%   The ONLY quantity that is legitimately comparable across the three
+%   segments is ANNUAL PLATFORM REVENUE IN DOLLARS. Dollars may be summed;
+%   headcounts may not.
+%
+%   WIRING: S1 is the segment the Year 1-3 financial model actually projects.
+%   Its "plan" line is \subARRYearThree (Section 9) verbatim, so the market
+%   section and the financial section can no longer drift apart. S2 and S3 are
+%   sized here as UPSIDE and are deliberately EXCLUDED from ARR, COGS, gross
+%   margin, LTV and valuation, which keeps the P&L a single-segment,
+%   single-ARPU, single-take-rate model. Do not add S2/S3 dollars to
+%   \actualSubRevenueYear* or \subARRYear* without recomputing every \HC*
+%   constant downstream of them.
 % ============================================================================
 
-% TAM components (number of potential users globally)
-\newcommand{\tamBitcoinUsers}{3000000}
-\newcommand{\tamPasswordMgrUsers}{4000000}
-\newcommand{\tamPhysicalVaultUsers}{500000}
-\newcommand{\tamPrivateSecUsers}{1500000}
+% ----------------------------------------------------------------------------
+% S1: B2C MARKETPLACE - unit = INDIVIDUALS
+% ----------------------------------------------------------------------------
+% Population: individual, non-institutional holders of more than $100K in BTC
+% who self-custody and therefore run a self-hosted time-lock. Consistent with
+% the companion economics paper (JUSTIFICATION.tex, variable wXXVI = 1100
+% thousands). Replaces the unsourced \tamBitcoinUsers = 3,000,000.
+%
+% TODO(SOURCE): 1,100,000 is the TOP of the defensible band, not its midpoint.
+%   No source publishes a count of INDIVIDUALS holding >$100K in BTC. The band
+%   800,000-1,155,000 is derived by scaling Henley & Partners' 145,100 Bitcoin
+%   millionaires down one wealth decade using ADDRESS-level decade ratios from
+%   BitInfoCharts (5.54x -> 804k; 7.96x -> 1,155k). Base case should arguably
+%   be 950,000. Carrying 1,100,000 for consistency with JUSTIFICATION.tex.
+% TODO(SOURCE): no self-custody rate by wealth band exists anywhere. S1 needs a
+%   self-custody haircut on this population and currently applies none, so the
+%   true S1 core is BELOW the figure carried here.
+\newcommand{\tamSegOneIndividuals}{1100000}
+\newcommand{\HCtamSegOneIndividuals}{1100000}
 
-% Total TAM
-\newcommand{\tamSubsGlobal}{\fpeval{\tamBitcoinUsers + \tamPasswordMgrUsers + \tamPhysicalVaultUsers + \tamPrivateSecUsers}}
+% TODO(SOURCE): $300,000 average holding is inherited from JUSTIFICATION.tex
+%   and could not be independently sourced. Implies ~22.8% of circulating BTC.
+\newcommand{\tamSegOneAvgHoldingUsd}{300000}
+\newcommand{\tamSegOneAumBn}{\fpeval{round(\tamSegOneIndividuals * \tamSegOneAvgHoldingUsd / 1000000000, 0)}}
+\newcommand{\HCtamSegOneAumBn}{330}
 
-% SAM (Serviceable Available Market) as % of TAM
-\newcommand{\samPercentOfTam}{15}
-\newcommand{\samSubs}{\fpeval{round(\tamSubsGlobal * \samPercentOfTam / 100, 0)}}
+% TODO(SOURCE): 15% TAM->SAM is carried over unchanged from the old flat model
+%   and is not validated for this population.
+\newcommand{\samPercentSegOne}{15}
+\newcommand{\samSegOneIndividuals}{\fpeval{round(\tamSegOneIndividuals * \samPercentSegOne / 100, 0)}}
+\newcommand{\HCsamSegOneIndividuals}{165000}
 
-% Target market share
-\newcommand{\targetShareSubs}{15}
-\newcommand{\targetSubsCountk}{\fpeval{round(\samSubs * \targetShareSubs / 100 / 1000, 0)}}
+% S1 ARPU: reuses the existing marketplace price ladder (Section 4).
+% DO NOT REDEFINE - these are aliases, not new scalars.
+\newcommand{\arpuSegOneGrossMonthly}{\subWeightedAvgPrice}   % 34.94 charged to customer
+\newcommand{\arpuSegOneMonthly}{\markWeightedAvgMonthly}     % 9.78 platform take
+\newcommand{\arpuSegOneAnnual}{\markWeightedAvgAnnual}       % 117.39 platform take
+
+% Annual cost to the anchor holder as basis points of protected holdings.
+% Benchmark framing only: spot Bitcoin ETF expense ratios run 14-25 bps.
+\newcommand{\arpuSegOneLoadBps}{\fpeval{round(\arpuSegOneGrossMonthly * 12 / \tamSegOneAvgHoldingUsd * 10000, 1)}}
+\newcommand{\HCarpuSegOneLoadBps}{14}
+
+% S1 target share is DERIVED FROM THE FINANCIAL MODEL, not asserted.
+% This is the reconciliation the old model lacked: \targetSubsCountk (203k)
+% never met \totalSubsYearThree (56,598) and nothing flagged the gap.
+\newcommand{\targetSubsSegOne}{\totalSubsYearThree}
+\newcommand{\targetShareSegOne}{\fpeval{round(\totalSubsYearThree / \samSegOneIndividuals * 100, 1)}}
+\newcommand{\HCtargetShareSegOne}{34.3}
+
+% S1 revenue lines (annual platform revenue, USD)
+\newcommand{\revSamSegOne}{\fpeval{round(\samSegOneIndividuals * \markWeightedAvgAnnual, 0)}}
+\newcommand{\revSamSegOneM}{\fpeval{round(\samSegOneIndividuals * \markWeightedAvgAnnual / 1000000, 1)}}
+\newcommand{\revPlanSegOneM}{\fpeval{round(\subARRYearThree / 1000000, 1)}}
+% Exit ARR is a run-rate, NOT what the Year 3 P&L books. The P&L books
+% \actualSubRevenueYearThree. Both are shown so the market section cannot drift
+% from content/05-financial-projections.tex.
+\newcommand{\revPlanSegOneActualM}{\fpeval{round(\actualSubRevenueYearThree / 1000000, 1)}}
+\newcommand{\HCrevPlanSegOneActualM}{4.1}
+\newcommand{\HCrevSamSegOneM}{19.4}
+\newcommand{\HCrevPlanSegOneM}{6.6}
+
+% S1 mission tier: journalists and human rights defenders. ARPU = 0 by
+% construction. Sponsored/donated seats are a marketing or COGS line, never a
+% revenue line and never added to any subscriber count.
+\newcommand{\arpuSegOneMissionMonthly}{0}
+\newcommand{\segOneMissionReachJournalists}{600000}
+
+% ----------------------------------------------------------------------------
+% S2: B2B LICENSING - unit = INSTITUTIONS
+% ----------------------------------------------------------------------------
+% Banks, payment institutions and fintechs embedding CUSTODIAL TGPO, where the
+% INSTITUTION imposes the delay on its own customers' outbound transfers.
+% ZERO MARKETPLACE REVENUE BY CONSTRUCTION: the institution wants the delay to
+% be real, so it never buys solving capacity to shortcut it. Revenue is annual
+% licence + seats + a one-off integration fee. No 28% take rate, no GMV, no
+% per-subscriber flow - see \arpuSegTwoMarketplaceRevenue below.
+\newcommand{\tamSegTwoInstBrazil}{926}      % BCB: active Pix participants, Dec-2025
+\newcommand{\tamSegTwoInstColombia}{218}    % Banco de la Republica: Bre-B linked entities
+\newcommand{\tamSegTwoInstArgentina}{205}   % BCRA: registered PSPCPs, Nov-2025
+\newcommand{\tamSegTwoInstMexico}{139}      % CNBV: 50 banks + 89 authorised ITFs
+\newcommand{\tamSegTwoInstitutions}{\fpeval{\tamSegTwoInstBrazil + \tamSegTwoInstColombia + \tamSegTwoInstArgentina + \tamSegTwoInstMexico}}
+\newcommand{\HCtamSegTwoInstitutions}{1488}
+
+% SAM = institutions that procure independently. The Pix participant count
+% includes several hundred single credit cooperatives running on shared core
+% platforms, which do not buy independently.
+% TODO(SOURCE): the claim that cooperatives buy through shared centrals
+%   (Sicoob, Sicredi, Ailos, Cresol, Unicred) rather than individually is
+%   UNSOURCED, and it is what removes ~500 institutions from the Brazil count.
+% TODO(SOURCE): the Brazil figure of 400 is arithmetic over three separately
+%   sourced components (~141 banks in BCB's STR list, >200 authorised payment
+%   institutions, ~60 SCD/SCFI) whose OVERLAP could not be verified.
+\newcommand{\samSegTwoInstBrazil}{400}
+\newcommand{\samSegTwoInstMexico}{139}
+\newcommand{\samSegTwoInstColombia}{50}
+\newcommand{\samSegTwoInstArgentina}{84}
+\newcommand{\samSegTwoInstitutions}{\fpeval{\samSegTwoInstBrazil + \samSegTwoInstMexico + \samSegTwoInstColombia + \samSegTwoInstArgentina}}
+\newcommand{\HCsamSegTwoInstitutions}{673}
+\newcommand{\samPercentSegTwo}{\fpeval{round(\samSegTwoInstitutions / \tamSegTwoInstitutions * 100, 1)}}
+\newcommand{\HCsamPercentSegTwo}{45.2}
+
+% S2 ARPU: annual licence + one-off integration. Anchored BELOW the closest
+% disclosed comparable (BioCatch: >$185M ARR / 340 financial-institution
+% customers = ~$544K mean) on scope grounds - TGPO is one narrow control, not
+% a fraud platform.
+% TODO(SOURCE): no public benchmark exists for what a bank pays for a
+%   coerced-transfer / enforced-delay control specifically. The step from
+%   $544K to $120K is a scope judgement, not a sourced comparable.
+% TODO(SOURCE): the $75,000 integration fee has no sourced comparable at all.
+\newcommand{\arpuSegTwoAnnualLicence}{120000}
+\newcommand{\arpuSegTwoIntegrationFee}{75000}
+\newcommand{\arpuSegTwoYearOneContract}{\fpeval{\arpuSegTwoAnnualLicence + \arpuSegTwoIntegrationFee}}
+\newcommand{\HCarpuSegTwoYearOneContract}{195000}
+
+% STRUCTURAL ZERO. S2 generates no marketplace GMV and no platform take.
+\newcommand{\arpuSegTwoMarketplaceRevenue}{0}
+
+% Tier ladder used to blend the $120K figure (Brazil, ~400 institutions).
+% TODO(SOURCE): the 10/100/290 tier split and the $900K/$220K/$60K price
+%   points are constructed, not observed. No source establishes how many
+%   institutions sit in each willingness-to-pay band.
+\newcommand{\segTwoTierOneCount}{10}
+\newcommand{\segTwoTierOnePrice}{900000}
+\newcommand{\segTwoTierTwoCount}{100}
+\newcommand{\segTwoTierTwoPrice}{220000}
+\newcommand{\segTwoTierThreeCount}{290}
+\newcommand{\segTwoTierThreePrice}{60000}
+\newcommand{\arpuSegTwoBlendCheck}{\fpeval{round((
+    \segTwoTierOneCount * \segTwoTierOnePrice +
+    \segTwoTierTwoCount * \segTwoTierTwoPrice +
+    \segTwoTierThreeCount * \segTwoTierThreePrice
+) / (\segTwoTierOneCount + \segTwoTierTwoCount + \segTwoTierThreeCount), 0)}}
+\newcommand{\HCarpuSegTwoBlendCheck}{121000}
+
+% TODO(SOURCE): the 8% five-year penetration is illustrative. No adoption
+%   curve for a regulated-payments security module in LatAm was sourced.
+\newcommand{\targetShareSegTwo}{8}
+\newcommand{\targetInstSegTwo}{\fpeval{round(\samSegTwoInstitutions * \targetShareSegTwo / 100, 0)}}
+\newcommand{\HCtargetInstSegTwo}{54}
+
+\newcommand{\revSamSegTwoM}{\fpeval{round(\samSegTwoInstitutions * \arpuSegTwoAnnualLicence / 1000000, 1)}}
+\newcommand{\revPlanSegTwoM}{\fpeval{round(\targetInstSegTwo * \arpuSegTwoAnnualLicence / 1000000, 1)}}
+\newcommand{\HCrevSamSegTwoM}{80.8}
+\newcommand{\HCrevPlanSegTwoM}{6.5}
+
+% ----------------------------------------------------------------------------
+% S3: B2B MARKETPLACE - unit = COMPANIES
+% ----------------------------------------------------------------------------
+% Businesses buying outsourced time-lock-puzzle solving capacity to protect
+% DIGITAL assets (self-custodied treasury keys, signing credentials, vault and
+% root secrets) against coerced, insider-initiated or vendor-compromised
+% release. NOT businesses protecting a physical safe: a steel box is gated by
+% a $100-$1,000 electronic timer and sequential squaring adds nothing there.
+% Cryptographic delay is only necessary when all three hold: the asset is a
+% SECRET (no enclosure can gate it), the adversary may be an INSIDER with
+% override authority, and the adversary may be the VENDOR itself.
+\newcommand{\tamSegThreeCompaniesLow}{8000}
+\newcommand{\tamSegThreeCompaniesHigh}{16000}
+\newcommand{\tamSegThreeCompanies}{\fpeval{round((\tamSegThreeCompaniesLow + \tamSegThreeCompaniesHigh) / 2, 0)}}
+\newcommand{\HCtamSegThreeCompanies}{12000}
+
+% SAM = the Brazil-anchored beachhead: Brazilian companies declaring crypto on
+% balance sheet, filtered by the self-custody constraint.
+% TODO(SOURCE): applies River's US 7.6% full-self-custody rate to Brazilian
+%   companies; no Brazil-specific corporate custody split exists.
+% TODO(SOURCE): the 6,000 upper bound reads River's unquantified "most use a
+%   third-party + self-custody hybrid" as roughly 50%. River publishes no such
+%   number. The Receita Federal base count (12,053) is from August 2022 and has
+%   not been extrapolated forward.
+\newcommand{\samSegThreeCompaniesLow}{900}
+\newcommand{\samSegThreeCompaniesHigh}{6000}
+\newcommand{\samSegThreeCompanies}{\fpeval{round((\samSegThreeCompaniesLow + \samSegThreeCompaniesHigh) / 2, 0)}}
+\newcommand{\HCsamSegThreeCompanies}{3450}
+\newcommand{\samPercentSegThree}{\fpeval{round(\samSegThreeCompanies / \tamSegThreeCompanies * 100, 0)}}
+\newcommand{\HCsamPercentSegThree}{29}
+
+% S3 ARPU: bracketed between the S1 Golden tier ($210/mo, floor) and the
+% verified Loomis SafePoint contract ($435.56/mo per safe unit, ceiling - but
+% that bundles armoured transport, cash counting and a loss guarantee).
+% Uses the SAME platform take rate as S1.
+% TODO(SOURCE): no business has ever paid for outsourced time-lock-puzzle
+%   solving. The category does not exist, so $300/mo is constructed by analogy
+%   and is not an observed price.
+% TODO(SOURCE): the 28% take rate is carried over from S1 with no B2B
+%   benchmark to validate it.
+% MODELLING WARNING: S3 does NOT scale with site count. Treasury keys are held
+%   centrally, so a 40-store chain buys one time-lock configuration, not 40.
+%   Treating S3 per-site would overstate revenue by an order of magnitude.
+\newcommand{\arpuSegThreeGrossMonthly}{300}
+\newcommand{\arpuSegThreeGrossMonthlyLow}{250}
+\newcommand{\arpuSegThreeGrossMonthlyHigh}{500}
+\newcommand{\arpuSegThreeMonthly}{\fpeval{\arpuSegThreeGrossMonthly * \markPlatformFeePercent / 100}}
+\newcommand{\arpuSegThreeAnnual}{\fpeval{\arpuSegThreeMonthly * 12}}
+\newcommand{\HCarpuSegThreeMonthly}{84}
+\newcommand{\HCarpuSegThreeAnnual}{1008}
+
+% TODO(SOURCE): 10% penetration is illustrative; no conversion rate can be
+%   estimated for a product category that does not yet exist.
+\newcommand{\targetShareSegThree}{10}
+\newcommand{\targetCompaniesSegThree}{\fpeval{round(\samSegThreeCompanies * \targetShareSegThree / 100, 0)}}
+\newcommand{\HCtargetCompaniesSegThree}{345}
+
+\newcommand{\revSamSegThreeM}{\fpeval{round(\samSegThreeCompanies * \arpuSegThreeAnnual / 1000000, 1)}}
+\newcommand{\revPlanSegThreeM}{\fpeval{round(\targetCompaniesSegThree * \arpuSegThreeAnnual / 1000000, 1)}}
+\newcommand{\HCrevSamSegThreeM}{3.5}
+\newcommand{\HCrevPlanSegThreeM}{0.3}
+
+% ----------------------------------------------------------------------------
+% CROSS-SEGMENT ROLL-UP - DOLLARS ONLY, NEVER HEADCOUNTS
+% ----------------------------------------------------------------------------
+% Summed from the ROUNDED per-segment figures, not the raw products, so that the
+% printed column in the SAM table actually foots. Summing unrounded values and
+% then rounding gives 103.6 against printed rows of 19.4 + 80.8 + 3.5 = 103.7.
+\newcommand{\revSamAllSegmentsM}{\fpeval{round(
+    \revSamSegOneM + \revSamSegTwoM + \revSamSegThreeM, 1)}}
+\newcommand{\HCrevSamAllSegmentsM}{103.7}
+
+% Same rounding discipline as the SAM roll-up above.
+\newcommand{\revPlanAllSegmentsM}{\fpeval{round(
+    \revPlanSegOneM + \revPlanSegTwoM + \revPlanSegThreeM, 1)}}
+\newcommand{\HCrevPlanAllSegmentsM}{13.4}
+
+% Portion of the plan that is NOT in the Year 1-3 projections (S2 + S3).
+\newcommand{\revUpsideExcludedM}{\fpeval{round((
+    \targetInstSegTwo * \arpuSegTwoAnnualLicence +
+    \targetCompaniesSegThree * \arpuSegThreeAnnual
+) / 1000000, 1)}}
+\newcommand{\HCrevUpsideExcludedM}{6.8}
+
+% ----------------------------------------------------------------------------
+% DEPRECATED ALIASES - retained so unmigrated content files still compile.
+% They now mean S1 ONLY. Do not use in new prose; migrate and delete.
+% ----------------------------------------------------------------------------
+\newcommand{\samSubs}{\samSegOneIndividuals}
+\newcommand{\targetShareSubs}{\targetShareSegOne}
 
 % ============================================================================
 % SECTION 17: MERCHANDISE (Excluded from projections - community engagement only)

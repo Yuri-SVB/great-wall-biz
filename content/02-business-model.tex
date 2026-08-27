@@ -4,9 +4,13 @@
 
 \subsection{Revenue Stream Segmentation}
 \begin{itemize}
-  \item \textbf{Subscriptions:} Anonymous marketplace for recurring memory-intensive computation services
+  \item \textbf{S1 --- Subscriptions (B2C marketplace, unit: individuals):} Anonymous marketplace for recurring memory-intensive computation services. \textbf{This is the only segment included in the Year 1--3 financial projections.}
+  \item \textbf{S2 --- Licensing (B2B, unit: institutions):} Custodial TGPO licensed to banks, payment institutions and fintechs, where the \emph{institution} imposes the delay. Annual licence, seats and integration fees only --- \textbf{zero marketplace revenue and no \numint{\markPlatformFeePercent}\% take rate by construction}, because an institution that wants the delay to be real never buys solving capacity to shortcut it. Sized in the Market Opportunity section; excluded from projections.
+  \item \textbf{S3 --- Capacity sales (B2B marketplace, unit: companies):} Solving capacity sold to companies protecting \emph{digital} assets (treasury keys, signing credentials, root secrets). Same take rate as S1, far higher ARPU, far lower count. Sized in the Market Opportunity section; excluded from projections.
   \item \textbf{Merchandise (Community Engagement):} Branded items sold via a separate 'Superfan Store' to engage our most passionate users. This is treated as a bonus revenue stream and is not included in the primary financial projections.
 \end{itemize}
+
+\noindent\textit{The three segments are counted in three different units and are never summed into a single customer number. Only annual revenue in dollars is comparable across them.}
 
 \subsection{Subscription Service: Anonymous Computation Marketplace}
 The subscription service operates as a computation matchmaking \textbf{marketplace} connecting:
@@ -34,9 +38,9 @@ Attribute & Subscription Users & Free Users \\\midrule
 Technical Level & Low-Medium & High \\
 Purchase Preference & Recurring & Self-hosted (no subscription) \\
 Price Sensitivity & Medium & High \\
-SAM Size & \numint{\samSubs}\cite{chainalysis2024,triple2023} & \textemdash \\
+SAM Size (S1 only) & \numint{\samSegOneIndividuals}~individuals\cite{henley2025crypto,chainalysis2024,triple2023} & \textemdash \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\noindent\textit{SAM refers to the Serviceable Available Market for subscription users. Free (self-hosted) users are excluded from SAM and related financial projections for simplicity. Merchandise is treated solely as community engagement and is not included in financial projections.}
+\noindent\textit{SAM here refers to the S1 (B2C marketplace) Serviceable Available Market only, counted in \textbf{individuals}. The S2 institution count and the S3 company count are different units and are reported separately in the Market Opportunity section; they are never added to this figure. Free (self-hosted) users are excluded from SAM and related financial projections for simplicity. Merchandise is treated solely as community engagement and is not included in financial projections.}

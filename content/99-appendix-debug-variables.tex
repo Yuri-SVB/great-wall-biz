@@ -269,21 +269,89 @@ optimisticValHigh & \$\validateint{\optimisticValHigh}{\HCoptimisticValHigh}M & 
 \medskip
 \textit{Rule of 40: Y2$\rightarrow$Y3 growth (\numfpeval{round(\growthRateYearTwoThree,0)}\%) + Y3 operating margin (\numfpeval{round(\operatingMarginYearThree,0)}\%) = \numfpeval{round(\ruleOfFortyScore,0)}}
 
-\subsection*{A16. Market Sizing (TAM/SAM)}
+\subsection*{A16. Market Sizing --- S1: B2C Marketplace (unit: individuals)}
 \begin{tabularx}{\linewidth}{l Y X}
 \toprule
 \textbf{Variable} & \textbf{Value} & \textbf{Description} \\\midrule
-tamBitcoinUsers & \numint{\tamBitcoinUsers} & Bitcoin user segment \\
-tamPasswordMgrUsers & \numint{\tamPasswordMgrUsers} & Password mgr segment \\
-tamPhysicalVaultUsers & \numint{\tamPhysicalVaultUsers} & Physical vault segment \\
-tamPrivateSecUsers & \numint{\tamPrivateSecUsers} & Private security segment \\
-\textbf{tamSubsGlobal} & \textbf{\numint{\tamSubsGlobal}} & \textbf{Total TAM} \\
-samPercentOfTam & \num{\samPercentOfTam}\% & SAM as \% of TAM \\
-\textbf{samSubs} & \textbf{\numint{\samSubs}} & \textbf{SAM (users)} \\
-targetShareSubs & \num{\targetShareSubs}\% & Target market share \\
-targetSubsCountk & \num{\targetSubsCountk}k & Target subscribers \\
+tamSegOneIndividuals & \validateint{\tamSegOneIndividuals}{\HCtamSegOneIndividuals} & TAM: individuals $>$\$100K in BTC \\
+tamSegOneAvgHoldingUsd & \$\numint{\tamSegOneAvgHoldingUsd} & Avg holding (input) \\
+tamSegOneAumBn & \$\validateint{\tamSegOneAumBn}{\HCtamSegOneAumBn}bn & Protected assets under TAM \\
+samPercentSegOne & \numint{\samPercentSegOne}\% & TAM $\rightarrow$ SAM rate (input) \\
+\textbf{samSegOneIndividuals} & \textbf{\validateint{\samSegOneIndividuals}{\HCsamSegOneIndividuals}} & \textbf{SAM (individuals)} \\
+arpuSegOneGrossMonthly & \$\num{\arpuSegOneGrossMonthly} & Alias of subWeightedAvgPrice \\
+arpuSegOneMonthly & \$\num{\arpuSegOneMonthly} & Alias of markWeightedAvgMonthly \\
+arpuSegOneLoadBps & \validateint{\arpuSegOneLoadBps}{\HCarpuSegOneLoadBps}~bps & Annual price / avg holding \\
+targetSubsSegOne & \numint{\targetSubsSegOne} & Alias of totalSubsYearThree \\
+targetShareSegOne & \validatepct{\targetShareSegOne}{\HCtargetShareSegOne} & \textbf{Derived} from the P\&L, not asserted \\
+revSamSegOneM & \$\validate{\revSamSegOneM}{\HCrevSamSegOneM}M & Platform rev.\ at 100\% of SAM \\
+revPlanSegOneM & \$\validate{\revPlanSegOneM}{\HCrevPlanSegOneM}M & Alias of subARRYearThree \\
+arpuSegOneMissionMonthly & \$\numint{\arpuSegOneMissionMonthly} & Journalist/HRD tier: zero by design \\
 \bottomrule
 \end{tabularx}
+
+\medskip
+\subsection*{A16b. Market Sizing --- S2: B2B Licensing (unit: institutions)}
+\begin{tabularx}{\linewidth}{l Y X}
+\toprule
+\textbf{Variable} & \textbf{Value} & \textbf{Description} \\\midrule
+tamSegTwoInstBrazil & \numint{\tamSegTwoInstBrazil} & BCB: active Pix participants \\
+tamSegTwoInstColombia & \numint{\tamSegTwoInstColombia} & Bre-B linked entities \\
+tamSegTwoInstArgentina & \numint{\tamSegTwoInstArgentina} & BCRA registered PSPCPs \\
+tamSegTwoInstMexico & \numint{\tamSegTwoInstMexico} & 50 banks + 89 ITFs \\
+\textbf{tamSegTwoInstitutions} & \textbf{\validateint{\tamSegTwoInstitutions}{\HCtamSegTwoInstitutions}} & \textbf{TAM (institutions)} \\
+\textbf{samSegTwoInstitutions} & \textbf{\validateint{\samSegTwoInstitutions}{\HCsamSegTwoInstitutions}} & \textbf{SAM: independent buyers} \\
+samPercentSegTwo & \validatepct{\samPercentSegTwo}{\HCsamPercentSegTwo} & SAM as \% of TAM (derived) \\
+arpuSegTwoAnnualLicence & \$\numint{\arpuSegTwoAnnualLicence} & Blended annual licence (input) \\
+arpuSegTwoIntegrationFee & \$\numint{\arpuSegTwoIntegrationFee} & One-off integration (input) \\
+arpuSegTwoYearOneContract & \validatemoney{\arpuSegTwoYearOneContract}{\HCarpuSegTwoYearOneContract} & Year-1 contract value \\
+arpuSegTwoBlendCheck & \validatemoney{\arpuSegTwoBlendCheck}{\HCarpuSegTwoBlendCheck} & Tier-ladder cross-check \\
+\textbf{arpuSegTwoMarketplaceRevenue} & \textbf{\$\numint{\arpuSegTwoMarketplaceRevenue}} & \textbf{Structural zero: no GMV, no take} \\
+targetShareSegTwo & \numint{\targetShareSegTwo}\% & Penetration (illustrative) \\
+targetInstSegTwo & \validateint{\targetInstSegTwo}{\HCtargetInstSegTwo} & Institutions at plan \\
+revSamSegTwoM & \$\validate{\revSamSegTwoM}{\HCrevSamSegTwoM}M & Licence rev.\ at 100\% of SAM \\
+revPlanSegTwoM & \$\validate{\revPlanSegTwoM}{\HCrevPlanSegTwoM}M & Licence rev.\ at plan (NOT in P\&L) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\subsection*{A16c. Market Sizing --- S3: B2B Marketplace (unit: companies)}
+\begin{tabularx}{\linewidth}{l Y X}
+\toprule
+\textbf{Variable} & \textbf{Value} & \textbf{Description} \\\midrule
+tamSegThreeCompaniesLow & \numint{\tamSegThreeCompaniesLow} & TAM lower bound \\
+tamSegThreeCompaniesHigh & \numint{\tamSegThreeCompaniesHigh} & TAM upper bound \\
+\textbf{tamSegThreeCompanies} & \textbf{\validateint{\tamSegThreeCompanies}{\HCtamSegThreeCompanies}} & \textbf{TAM (companies, midpoint)} \\
+samSegThreeCompaniesLow & \numint{\samSegThreeCompaniesLow} & Brazil beachhead lower bound \\
+samSegThreeCompaniesHigh & \numint{\samSegThreeCompaniesHigh} & Brazil beachhead upper bound \\
+\textbf{samSegThreeCompanies} & \textbf{\validateint{\samSegThreeCompanies}{\HCsamSegThreeCompanies}} & \textbf{SAM (companies, midpoint)} \\
+samPercentSegThree & \validatepct{\samPercentSegThree}{\HCsamPercentSegThree} & SAM as \% of TAM (derived) \\
+arpuSegThreeGrossMonthly & \$\numint{\arpuSegThreeGrossMonthly} & Gross monthly spend (input) \\
+arpuSegThreeMonthly & \validatemoney{\arpuSegThreeMonthly}{\HCarpuSegThreeMonthly} & Platform net at \numint{\markPlatformFeePercent}\% take \\
+arpuSegThreeAnnual & \validatemoney{\arpuSegThreeAnnual}{\HCarpuSegThreeAnnual} & Platform net per year \\
+targetShareSegThree & \numint{\targetShareSegThree}\% & Penetration (illustrative) \\
+targetCompaniesSegThree & \validateint{\targetCompaniesSegThree}{\HCtargetCompaniesSegThree} & Companies at plan \\
+revSamSegThreeM & \$\validate{\revSamSegThreeM}{\HCrevSamSegThreeM}M & Platform rev.\ at 100\% of SAM \\
+revPlanSegThreeM & \$\validate{\revPlanSegThreeM}{\HCrevPlanSegThreeM}M & Platform rev.\ at plan (NOT in P\&L) \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\subsection*{A16d. Cross-Segment Roll-Up (dollars only --- headcounts are NOT summable)}
+\begin{tabularx}{\linewidth}{l Y X}
+\toprule
+\textbf{Variable} & \textbf{Value} & \textbf{Description} \\\midrule
+revSamAllSegmentsM & \$\validate{\revSamAllSegmentsM}{\HCrevSamAllSegmentsM}M & S1+S2+S3 annual platform rev.\ at SAM \\
+revPlanAllSegmentsM & \$\validate{\revPlanAllSegmentsM}{\HCrevPlanAllSegmentsM}M & S1+S2+S3 at stated penetration \\
+revUpsideExcludedM & \$\validate{\revUpsideExcludedM}{\HCrevUpsideExcludedM}M & S2+S3 only: excluded from Y1--Y3 P\&L \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\noindent\textit{Units differ by segment (individuals / institutions / companies) and
+are never added. The Combined rows sum dollars only. S1 is the only segment wired into
+the Year 1--3 financial model: revPlanSegOneM is subARRYearThree verbatim, and
+targetShareSegOne is totalSubsYearThree divided by samSegOneIndividuals, so the market
+and financial sections cannot drift apart.}
 
 \subsection*{A17. Merchandise (Reference Only)}
 \begin{tabularx}{\linewidth}{l Y Y Y}
