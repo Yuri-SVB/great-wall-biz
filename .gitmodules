@@ -1,6 +1,0 @@
-[submodule "submodules/faq"]
-	path = submodules/faq
-	url = git@github.com:T3-InfoSec/faq.git
-[submodule "submodules/one-pager"]
-	path = submodules/one-pager
-	url = git@github.com:T3-InfoSec/one-pager.git
