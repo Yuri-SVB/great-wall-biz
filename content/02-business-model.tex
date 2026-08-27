@@ -2,6 +2,76 @@
 
 \section{Business Model: Marketplace + CAC Optimization}
 
+\subsection{One Protocol, Two Deployments}
+
+TGPO --- the Time-Gated Perceptual Oracle --- authenticates by \emph{recognition}
+rather than by recall. The holder recognises something they cannot describe, so
+there is nothing to hand over under coercion, and a mandated delay means an
+attacker cannot convert a captive into an immediate transfer. That single
+mechanism ships in two deployments, and the difference between them is what
+produces the segment structure below.
+
+\begin{table}[H]
+\centering
+\caption{Deployment Modes}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+ & \textbf{Custodial} (S2) & \textbf{Self-custodial} (S1, S3) \\\midrule
+What it produces & an authentication decision & a derived key \\
+Who deploys it & the institution & the holder \\
+Entropy required & $\sim$16 bits & $\sim$160 bits \\
+Why & the institution counts and freezes failed attempts, as it already does for PINs & nobody counts guesses against an encrypted seed; the adversary works offline and unboundedly \\
+Substrate & synthesised server-side per user; can be faces or voices & derived deterministically on the holder's device, inside an entropy budget \\
+Delay imposed by & the institution's own system & the holder's time-lock (solved locally, or bought on the marketplace) \\
+Marketplace revenue & none --- there is nothing to outsource & yes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{The custodial instance, concretely.} Four palettes of sixteen
+images, reshuffled on every use; the holder picks one per palette. That is
+$16^4 = 2^{16}$, against $10^4$ for a four-digit PIN --- roughly six times the
+search space of what banks deploy today, at a fraction of the cognitive load of a
+password. Because the palette never has to be reproduced from a seed on the
+holder's own hardware, it can be drawn from substrates that are expensive to
+synthesise locally and cheap to synthesise server-side: human faces and voices,
+which are also the substrates humans recognise most reliably.
+
+\noindent\textbf{Why self-custody needs more.} The bank counts your guesses.
+Nobody counts guesses against your own encrypted seed --- an attacker copies the
+ciphertext and attacks it offline, without limit. Sixteen bits is ample when
+attempts are rationed and hopeless when they are not, which is why the
+self-custodial substrate is a high-entropy one rather than a grid of faces. The
+difference is not ambition; it is the absence of a referee.
+
+\subsection{Two Deployments, Two Publics}
+
+The modes reach different people, and neither is a stepping stone to the other in
+the pejorative sense --- each is the right product for its audience.
+
+\begin{itemize}
+  \item \textbf{Custodial reaches the broad public.} The user is not asked to
+        adopt anything: their bank deploys it, exactly as banks deployed
+        transaction limits, device registration and hardware tokens before it.
+        Adoption is a procurement decision, not a conversion. This is the mode
+        that familiarises a mass audience with recognition-based authentication
+        and with the idea that a deliberate delay is a security feature rather
+        than a defect.
+  \item \textbf{Self-custodial reaches an earlier-adopting public that already
+        exists.} The community that generates wallet entropy by hand --- rolling
+        dice, dozens of times, to avoid trusting a device's random number
+        generator --- has already demonstrated a tolerance for effortful
+        security ritual that no consumer population shares. The objection that
+        TGPO asks too much of users is answered empirically by the people
+        already doing more.
+\end{itemize}
+
+\noindent\textit{Development status, stated plainly: a partial self-custodial
+prototype exists; the custodial mode is designed but not built. Custodial is the
+smaller engineering problem of the two --- it drops the entropy budget, the
+deterministic derivation and the offline constraint --- but it is not yet
+implemented, and nothing in this document should be read as claiming otherwise.}
+
 \subsection{Revenue Stream Segmentation}
 \begin{itemize}
   \item \textbf{S1 --- Subscriptions (B2C marketplace, unit: individuals):} Anonymous marketplace for recurring memory-intensive computation services. \textbf{This is the only segment included in the Year 1--3 financial projections.}
