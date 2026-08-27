@@ -1,0 +1,223 @@
+% pitch-5min.tex — BitAngels / Magic Island Demo Day, 5 minutes
+% Numbers are single-sourced from ../values/variables.tex. Do not restate them here.
+\documentclass[aspectratio=169,12pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{xfp}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usetikzlibrary{shadows.blur}
+
+\sisetup{group-minimum-digits=3, group-separator={,},
+         round-mode=places, round-precision=2}
+\newcommand{\numint}[1]{\num[round-precision=0]{\fpeval{#1}}}
+
+% Financial model — the single source of truth.
+\input{../values/variables}
+
+% Registry figures (verified against jlopp/physical-bitcoin-attacks, 2026-08-13).
+\newcommand{\regTotal}{344}
+\newcommand{\regBrazil}{12}
+\newcommand{\regBrazilThisYear}{2}
+
+\definecolor{ink}{HTML}{11161C}
+\definecolor{paper}{HTML}{FAF8F4}
+\definecolor{accent}{HTML}{C4462F}
+\definecolor{muted}{HTML}{6B7684}
+
+\setbeamercolor{normal text}{fg=ink,bg=paper}
+\setbeamercolor{frametitle}{fg=ink,bg=paper}
+\setbeamercolor{structure}{fg=accent}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{\vspace{0.8cm}\insertframetitle\par\vspace{-0.2cm}}
+\setbeamertemplate{footline}{\hfill\tiny\color{muted}\insertframenumber\hspace{1em}\vspace{0.4em}}
+
+\newcommand{\huger}[1]{{\fontsize{56}{60}\selectfont\bfseries #1}}
+\newcommand{\bignum}[1]{{\fontsize{34}{38}\selectfont\bfseries #1}}
+\newcommand{\quiet}[1]{{\color{muted}#1}}
+
+\begin{document}
+
+% ---------------------------------------------------------------- 0:00
+\begin{frame}[plain]
+  \vfill
+  \centering
+  {\fontsize{44}{48}\selectfont\bfseries Great Wall}\\[0.5cm]
+  {\Large Coercion-resistant authentication}\\[1.2cm]
+  \quiet{Yuri S.\ Villas Boas \quad·\quad author, Bitcoin BIP-450}
+  \vfill
+\end{frame}
+\note{MASKED from here. Project hard — the mask muffles. 15s.}
+
+% ---------------------------------------------------------------- 0:15
+\begin{frame}[t]{This is not a foreign problem}
+  \vspace{0.6cm}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+      \huger{\regTotal}\\[0.2cm]
+      documented physical attacks on Bitcoin holders
+    \column{0.5\textwidth}
+      \huger{\regBrazil}\\[0.2cm]
+      of them in Brazil\\[0.6cm]
+      \bignum{\regBrazilThisYear}\\[0.2cm]
+      this year
+  \end{columns}
+  \vfill
+  \quiet{Florianópolis, 2017. Jameson Lopp's public registry.}
+\end{frame}
+\note{City and year only. NO NAME. Sober, never lurid. 45s.}
+
+% ---------------------------------------------------------------- 1:00
+\begin{frame}[plain]
+  \vfill\centering
+  {\fontsize{40}{46}\selectfont\bfseries Our answer has been:}\\[0.8cm]
+  {\fontsize{40}{46}\selectfont\bfseries\color{accent}``Don't tell anyone.''}
+  \vfill
+\end{frame}
+\note{*** REMOVE MASK AND SHADES HERE. *** On the beat, not mid-sentence. ~4s.
+Then: "I'm not telling you to stop being private. I'm telling you privacy isn't a
+mechanism. It's a bet that the attacker doesn't know something you do — and
+Kerckhoffs settled that in 1883." 1:00-1:30.}
+
+% ---------------------------------------------------------------- 1:30
+\begin{frame}[t]{What actually works}
+  \vspace{1.2cm}
+  \centering
+  {\fontsize{30}{36}\selectfont You cannot be forced to hand over\\[0.3cm]
+   \textbf{something you cannot describe.}}
+  \vfill
+  \quiet{Recognition, not recall. There is nothing to write down, and nothing to take.}
+\end{frame}
+\note{30s. This is the whole idea. Slow down here.}
+
+% ---------------------------------------------------------------- 2:00
+\begin{frame}[t]{How it looks to a user}
+  \vspace{0.3cm}
+  \centering
+  \begin{tikzpicture}[x=0.62cm,y=0.62cm]
+    \foreach \r in {0,1,2,3}{
+      \foreach \c in {0,...,15}{
+        \fill[black!8,rounded corners=1pt] (\c,-\r*1.25) rectangle ++(0.52,0.52);
+      }
+    }
+    % one pick per palette
+    \foreach \r/\c in {0/4, 1/11, 2/2, 3/9}{
+      \fill[accent,rounded corners=1pt] (\c,-\r*1.25) rectangle ++(0.52,0.52);
+    }
+    \foreach \r in {0,1,2,3}{
+      \node[anchor=east,muted,font=\scriptsize] at (-0.4,-\r*1.25+0.26) {palette \the\numexpr\r+1\relax};
+    }
+  \end{tikzpicture}
+  \vfill
+  {\large Four palettes. Sixteen faces each. Reshuffled every time.\\[0.3cm]
+   You pick the one you know.}
+\end{frame}
+\note{60s — the money slide. "Your bank already does this with a 4-digit PIN.
+This is 65,536 combinations against ten thousand — and it's easier to remember,
+because you recognise a face instead of recalling a number." 2:00-3:00.}
+
+% ---------------------------------------------------------------- 3:00
+\begin{frame}[t]{Two deployments, one protocol}
+  \vspace{0.5cm}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+      \textbf{\large Custodial}\\[0.3cm]
+      \bignum{$2^{16}$}\\[0.2cm]
+      The bank counts your guesses and freezes the account.\\[0.4cm]
+      \quiet{Sixteen bits is plenty.}
+    \column{0.48\textwidth}
+      \textbf{\large Self-custodial}\\[0.3cm]
+      \bignum{$2^{160}$}\\[0.2cm]
+      \emph{Nobody} counts guesses against your own encrypted seed.\\[0.4cm]
+      \quiet{Which is why it can't be faces.}
+  \end{columns}
+  \vfill
+\end{frame}
+\note{THE BRIDGE. 40s. Say it exactly: "The bank counts your guesses, so 16 bits
+is plenty. Nobody counts guesses against your own encrypted seed — so self-custody
+needs 160, and that's why it can't be faces." 3:00-3:40.}
+
+% ---------------------------------------------------------------- 3:40
+\begin{frame}[t]{Where the money is}
+  \vspace{0.6cm}
+  \begin{columns}[T]
+    \column{0.55\textwidth}
+      \textbf{\large License it to banks}\\[0.4cm]
+      \bignum{\$\num[round-precision=1]{\revSamSegTwoM}M}\\[0.2cm]
+      serviceable market, \numint{\samSegTwoInstitutions} institutions\\[0.5cm]
+      \quiet{Brazil's central bank already imposes night-time Pix limits.
+      It has conceded that \textbf{delay} is the countermeasure. Its own data
+      shows the refund mechanism recovering \(\sim\)9\% of confirmed fraud.}
+    \column{0.42\textwidth}
+      \textbf{\large Sell it to holders}\\[0.4cm]
+      \bignum{\$\num[round-precision=1]{\revSamSegOneM}M}\\[0.2cm]
+      serviceable market\\[0.5cm]
+      \quiet{The self-custody marketplace. Smaller, and it is where the
+      credibility comes from.}
+  \end{columns}
+\end{frame}
+\note{50s. Licensing first — it is 4x larger and the evidence is the
+regulator's own. One product, sequenced. NOT two businesses. 3:40-4:30.}
+
+% ---------------------------------------------------------------- 4:30
+\begin{frame}[t]{The ask}
+  \vspace{1.0cm}
+  \centering
+  \huger{\$\numint{\seedAmount/1000}K}\\[0.4cm]
+  {\Large for \numint{\seedEquity}\% at \$\num[round-precision=1]{\fpeval{\seedValuation/1000000}}M post-money}\\[1.0cm]
+  {\large \numint{\HCseedRunwayMonths} months of runway --- team, integration, first bank pilot}
+  \vfill
+\end{frame}
+\note{30s. Then stop talking. 4:30-5:00.}
+
+% ================================================================ BACKUP
+\begin{frame}[plain]
+  \vfill\centering\quiet{\Large backup}\vfill
+\end{frame}
+
+\begin{frame}[t]{Why me}
+  \vspace{0.8cm}
+  \begin{itemize}\setlength\itemsep{0.5em}
+    \item Author of \textbf{BIP-450} --- a Bitcoin standard, peer-reviewed by the same process
+    \item \textbf{37-page paper} formalising the attack, with a public DOI
+    \item Contributor to the attack registry the model is calibrated on
+    \item \texttt{great-wall-core} is \textbf{public and in beta} --- the encoder is real code
+  \end{itemize}
+  \vfill
+  \quiet{Solo founder. Pre-incorporation --- I incorporate on term sheet, in whichever
+  jurisdiction the round wants.}
+\end{frame}
+
+\begin{frame}[t]{``Doesn't multisig solve this?''}
+  \vspace{1.0cm}
+  {\Large No --- it moves the problem.}\\[0.8cm]
+  A co-signer who can be reached is a second victim, not a second lock.\\[0.4cm]
+  A co-signer who \emph{cannot} be reached is a custodian, and you have
+  given up self-custody to get there.
+\end{frame}
+
+\begin{frame}[t]{``What about a duress PIN?''}
+  \vspace{1.0cm}
+  {\Large That is the failure mode, not the fix.}\\[0.8cm]
+  A partial disclosure the attacker cannot verify gives them a reason to
+  keep going. Graceful degradation --- a virtue everywhere else in
+  engineering --- is, under coercion, an incentive to escalate.\\[0.5cm]
+  \quiet{Blockstream ships a duress PIN. That is the strongest evidence I have
+  that the problem is real.}
+\end{frame}
+
+\begin{frame}[t]{Status, honestly}
+  \vspace{0.9cm}
+  \begin{itemize}\setlength\itemsep{0.5em}
+    \item Self-custodial encoder: \textbf{public beta}
+    \item Custodial deployment: \textbf{designed, not built} --- and it is the
+          \emph{smaller} engineering problem
+    \item No entity yet; no revenue yet
+  \end{itemize}
+  \vfill
+  \quiet{The seed builds the custodial product and lands the first bank pilot.}
+\end{frame}
+
+\end{document}
