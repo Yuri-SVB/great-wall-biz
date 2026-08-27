@@ -1,0 +1,137 @@
+\documentclass[8pt]{article}
+
+% Packages
+\usepackage[a4paper,margin=0.7in]{geometry}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{hyperref} % Required for adding links	and customizing them
+\definecolor{linkcolour}{rgb}{0,0.2,0.6} % Link color
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour} % Set link colors throughout the document
+
+\newcommand{\faqurl}{https://loudproudandfree.com}
+\newcommand{\obsegg}{https://www.linkedin.com/posts/lugano-plan-b_luganoplanb-bitcoin-activity-7167881837728493568-LEZk/}
+\newcommand{\theproblem}{https://x.com/search?q=jameson\%20lopp\%20wrench\%20attack&src=typed_query&f=live}
+\newcommand{\nocurrentsolution}{https://www.youtube.com/watch?v=MsfR6ZIkzPs&t=2734s}
+\newcommand{\kba}{https://en.wikipedia.org/wiki/Knowledge-based_authentication}
+\newcommand{\kprinciple}{https://en.wikipedia.org/wiki/Kerckhoffs's_principle}
+\newcommand{\privsecplaque}{https://duckduckgo.com/?q=prosegur+verisure+\%22warning+sign\%22+facade\&iar=images\&t=brave\&iaf=type\%3Aphoto}
+
+% Colors
+\definecolor{accent}{RGB}{247, 147, 26}
+
+% Custom Commands
+\newcommand{\feature}[2]{
+    \noindent\textbf{\large #1}\par
+    \vspace{2pt}
+    #2
+    \vspace{7pt}
+}
+
+% Document
+\begin{document}
+\pagestyle{empty}
+\enlargethispage{3\baselineskip}  % <-- disables all page numbering
+% Title Section
+\begin{center}
+    \vspace*{-1cm}
+    {\huge\bfseries\color{accent} Great Wall: Reinventing Coercion-Resistance}\\[1ex]
+    {\large\textit{``I have never seen an unworried Bitcoiner''}}
+    \vspace{0.2cm}
+\end{center}
+
+% App Description
+\noindent
+The 2023-2026 Bitcoin cycle has seen a \href{\theproblem}{terrifying rise in \textbf{wrench attacks}} (theft of crypto through robbery or kidnapping), and \href{\nocurrentsolution}{the community still has no simple, effective, affordable answer}. Yet. Meet \textbf{Great Wall}, the definitive coercion-resistant self-custody protocol --- \textbf{the only} one combining all four properties below: 
+
+\vspace{0.2cm}
+
+% Features Section
+{\color{accent}\hrule}
+\vspace{0.2cm}
+{\Large\textbf{Key Features}}
+\vspace{0.2cm}
+{\color{accent}\hrule}
+\vspace{0.2cm}
+
+\begin{multicols}{2}
+    \feature{1 \href{\kba}{Deviceless / KBA}}{
+        No gadget, metal plate, vault, physical address, etc (additional points of failure) are necessary for the key derivation. 
+    }
+
+    \feature{2 Non-Shared Custody}{
+        You don't compromise Bitcoin's foundational premise of \textbf{individual} custody.
+    }
+
+    \feature{3 \href{\kprinciple}{Non-Obscurity}}{
+        You don't need to \href{\obsegg}{hide in shadows}, nor wish on your lucky start that your secret trick (like decoy wallet) is never learned by the bad guys.
+    }
+
+    \feature{4 Coercion-Resistance}{
+        Commitment or threat of violence on user yields no material benefit to the attacker in any circumstance.
+    }
+\end{multicols}
+
+% \vspace{0.5cm}
+
+% Features Section
+{\color{accent}\hrule}
+\vspace{0.2cm}
+{\Large\textbf{How It Works}}
+\vspace{0.2cm}
+{\color{accent}\hrule}
+\vspace{0.22cm}
+
+\noindent
+Simply put: ``1) It's all in your brain; 2) in nobody else's; 3) the attacker knows it; and 4) still cannot coerce it out of you''. Here is how we deliver that --- and monetize it.
+
+% Visual / Screenshot (optional)
+\begin{center}
+    \includegraphics[width=1\textwidth]{gw-one-pager-diagram.png}
+    \textit{Comparative BPMN diagrams representing BIP39 and Great Wall key derivation schemes.}
+\end{center}
+
+\noindent
+The protocol is \textbf{TGPO --- the Time-Gated Perceptual Oracle}. It authenticates by \emph{recognition} rather than recall: you recognise something you cannot describe, so there is nothing to hand over under coercion. In its \textbf{self-custodial} deployment, likewise BIP39, it's just a key derivation scheme that can run 100\% offline in any device. The simple way to describe it is to say:
+
+\begin{enumerate}
+ \item You input an initial seed equivalent in strength to 6 BIP39 words into an \href{\faqurl}{hours-long hash};
+ \item Hash specifies a seed to your `private game', which admits a near-infinity of possible `gameplays';
+ \item Bits of your `private gameplay' of your `private game' are added to the entropy of the master secret;
+\end{enumerate}
+
+\noindent
+The catch is that the knowledge of `gameplay' is easy to memorize but impossible to put into words. Because of that, you, kept alive and well, are strictly necessary during the entire process, \href{\faqurl}{which can take hours, days, or even weeks} --- so stealing your stash becomes at least as difficult as sustaining a kidnapping that long. That fractal game is the \textbf{self-custodial} deployment, needing $\sim$\textbf{160 bits} on your own device, since nobody counts guesses against an encrypted seed. It also ships \textbf{custodially}: the \textit{institution} imposes the delay and counts failed attempts, so $\sim$\textbf{16 bits} suffices --- four palettes of sixteen server-synthesised \textbf{faces}, one pick each: $16^4=2^{16}$, against $10^4$ for a 4-digit PIN. \textit{(Self-custodial prototype partial; custodial designed, not built.)} Likewise \href{https://apps.ankiweb.net/}{Anki} and \href{https://www.duolingo.com/}{Duolingo}, an \textbf{integrated memory coach} prevents both \textit{forgetting} and \textit{fatigue}: a half-minute game-like UX, replayed about weekly, cements lifelong coercion-resistant access.
+
+\vspace{0.22cm}
+
+{\color{accent}\hrule}
+\vspace{0.2cm}
+{\Large\textbf{Monetization} --- \href{\faqurl}{first-mover lock-in}}
+\vspace{0.2cm}
+{\color{accent}\hrule}
+\vspace{0.22cm}
+
+% The following are revenue streams with first-mover advantage and natural market consolidation:
+\begin{enumerate}
+ \item \textbf{subscriptions} (individuals) --- \href{\faqurl}{without compromising security}, outsource the hours- or days-long computation instead of tying up your own device; \textbf{inheritance} rides the same recurrent micropayment;
+ \item \textbf{licensing} (institutions) --- custodial TGPO licensed to banks and fintechs, which impose the delay themselves: licence, seats and integration fees, no take rate by construction;
+ \item \textbf{capacity sales} (companies) --- solving capacity for \textit{digital} assets: treasury keys, signing credentials, root secrets;
+ \item \textbf{hardware} --- for premium UX, high-end users will prefer dedicated air-gapped hardware;
+ \item \textbf{merchandise} --- likewise \href{\privsecplaque}{security firms' warning signs}, dissuades attackers and propagates virally;
+\end{enumerate}
+
+% Call to Action
+
+\noindent
+{\color{accent}\rule{\linewidth}{0.5mm}}
+% \vspace{0.1cm}
+\begin{center}
+%     {\Large\textbf{Available now on [Platforms]!}}\\
+Visit \href{https://loudproudandfree.com}{loudproudandfree.com} to verify all claims.
+\end{center}
+
+\end{document}
