@@ -2,7 +2,16 @@
 
 \section{Funding Requirements and Use of Proceeds}\label{sec:funding}
 
-\subsection{Seed Round (Current)}
+\subsection{Pre-Seed (Now)}
+Up to \textbf{\$\numint{\preseedCap/1000}K} at a \textbf{\$\numint{\preseedValuation/1000000}M post-money valuation} (e.g.\ \$\numint{\preseedExampleTicket/1000}K = \numint{\preseedExampleTicket/\preseedValuation*100}\%), convertible into equity on incorporation. It is an early-supporter price, a third of the seed's, for investing before the milestones the seed price assumes. Use of funds:
+\begin{itemize}
+  \item the online course launched at \href{\anarcurl}{Anarcópolis} (\masterclassDate);
+  \item the Flying Turtle release (\flyingTurtleDate);
+  \item incorporation.
+\end{itemize}
+
+\subsection{Seed Round (Next)}
+\$\numint{round(\seedAmount/1000,0)}K for \numint{\seedEquity}\% at \$\numfpeval{round(\seedValuation/1000000,1)}M post-money: \numint{\seedRunwayMonths} months of runway to build the team, the custodial integration and the first bank pilot, and to scale the self-custody marketplace. The allocation below follows the Year~1 operating plan of the marketplace model.
 
 % Calculate allocation percentages for pie chart
 \newcommand{\seedTotalBase}{\fpeval{\teamSalariesYearOne + \infrastructureYearOne + \legalComplianceYearOne + \marketingBudgetYearOne}}
@@ -55,17 +64,16 @@ Platform Scaling & \numint{\seriesAAmount} & Team growth, ecosystem integrations
 
 \noindent Series A pricing is supported by de-risked traction and movement-led go-to-market (CAC, conversion, churn, and referral rate), rather than a simple trailing ARR multiple.
 
-\subsection{Near-Term Timeline (Next 7 Months)}
+\subsection{Near-Term Timeline}
 \begin{table}[H]
 \centering
 \begin{tabularx}{\linewidth}{l l X}
 \toprule
 Milestone & Target Date & Goal \\\midrule
-MVP Ready & \mvpDate & MVP feature-complete; internal QA complete \\
-First \numint{\betaFirstClients} Beta Clients & \betaTenDate & Onboard design partners; collect feedback \\
-End of Beta (\numint{\betaEndClients} Clients) & \betaEndDate & Close beta; finalize pricing and onboarding \\
-Scale Marketing / Hire CMO & \scaleMktDate & Launch paid + referral programs; leadership hire \\
-\numint{\betaUsers} Customers & \kCustomersDate & Scale supply/demand; readiness for broader launch \\
+Master class and pilot course & \masterclassDate & First paying users; learn who buys \\
+Flying Turtle release & \flyingTurtleDate & Anonymous payment for time-lock solving; first marketplace revenue \\
+Seed close and incorporation & On term sheet & Entity formed; pre-seed converts into equity \\
+Custodial product and first bank pilot & Funded by the seed & First licensing customer; 12--18 month sales cycle \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -75,9 +83,9 @@ Scale Marketing / Hire CMO & \scaleMktDate & Launch paid + referral programs; le
 \textbf{Year 1 (Months 0--12): Build + Validate Marketplace}
 \begin{itemize}
   \item Month 0: Raise \$\numint{round(\seedAmount/1000,0)}K Seed (\num{\seedEquity}\% equity), \$\numfpeval{round(\seedValuation/1000000,1)}M post-money valuation (\numint{\seedRunwayMonths}-month runway)
-  \item Months \num{\marketplaceBuildStartMonth}--\num{\marketplaceBuildEndMonth}: Build anonymous matchmaking infrastructure and reputation system
+  \item Months \num{\marketplaceBuildStartMonth}--\num{\marketplaceBuildEndMonth}: Build anonymous matchmaking infrastructure and reputation system; start the custodial integration
   \item Months \num{\betaLaunchStartMonth}--\num{\betaLaunchEndMonth}: Launch beta with \numint{\betaEndClients} design partners, scale toward \numint{\betaUsers} users
-  \item Months \num{\marketplaceScaleStartMonth}--\num{\marketplaceScaleEndMonth}: Scale marketplace and validate unit economics
+  \item Months \num{\marketplaceScaleStartMonth}--\num{\marketplaceScaleEndMonth}: Scale marketplace and validate unit economics; first bank pilot
   \item End of Year 1: \numint{\totalSubsYearOne} subscribers; Exit ARR \$\numfpeval{round(\subARRYearOne/1000000,2)}M
 \end{itemize}
 
