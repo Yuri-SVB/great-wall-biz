@@ -20,7 +20,7 @@ Subscription Exit ARR & \num{\arrMultiple}x & \numint{\subARRYearOne * \arrMulti
 \begin{tabularx}{\linewidth}{l l r r L}
 \toprule
 Stage & Timing & Funding & Valuation & Basis \\\midrule
-\textbf{Pre-seed} & Now & up to \$\numint{\preseedCap/1000}K & \$\numint{\preseedValuation/1000000}M & Early-supporter price; converts on incorporation \\
+\textbf{Pre-seed} & Now & up to \$\numint{\roundPreseedCap/1000}K & \$\numint{\roundPreseedValuation/1000000}M & Early-supporter price; converts on incorporation \\
 \textbf{Seed} & Month 0 & \$\numint{round(\seedAmount/1000,0)}K & \$\numfpeval{round(\seedValuation/1000000,1)}M & Market comparables* \\
 \textbf{Series A} & Month 18 & \$\numint{\seriesAAmount/1000000}M & \$\numfpeval{\seriesAValuation/1000000}M & Financing-driven; supported by forward net ARR trajectory, CAC efficiency, and movement-led GTM \\
 \textbf{Target} & Year 3 & 0 & \$\num{\targetValLow}--\num{\targetValHigh}M & \$\numfpeval{round(\subARRYearThree/1000000,1)}M $\times$ \numfpeval{\targetARRMultiple}--\num{\arrMultiple} (ARR mult.) \\
