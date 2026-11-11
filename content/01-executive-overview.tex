@@ -4,7 +4,13 @@
 This document presents an investment opportunity in Great Wall, a company whose mission is to solve the single biggest unsolved problem in cryptocurrency\textemdash the ``\$5 wrench attack''\textemdash and the fragility created by obscurity-based security approaches.
 
 \textbf{The problem:} \par
-As self-custody becomes mainstream as captured by the trend ``Not your keys, not your coins'', users are increasingly vulnerable to physical threats and coercion---a vulnerability underscored by 2025 and 2026's record surge in wrench attacks\cite{lopp2024} (see Section~\ref{sec:market-inflection}).
+As self-custody becomes mainstream as captured by the trend ``Not your keys, not your coins'', users are increasingly vulnerable to physical threats and coercion. The \href{\registryurl}{public registry} of physical attacks on Bitcoin holders\cite{lopp2024} lists \textbf{\attacksTotal} cases as of \attacksAsOf, with a record \attacksRecordYearCount{} in \attacksRecordYear{} and \attacksBrazil{} in Brazil (see Section~\ref{sec:market-inflection}). \textbf{About 1 in 25 ends with someone dead} (\attacksKilled{} of \attacksTotal), and \textbf{\attacksAbductNow\% of \attacksRecordYear's attacks involved abduction or captivity}, up from \attacksAbductThen\% in 2021. The registry is press-sourced: a floor, not a census.
+
+The community's answer has been ``don't tell anyone.'' Obscurity is not a mechanism: it is a bet that the attacker does not know something you do, and \href{\kprincipleurl}{Kerckhoffs} settled that in 1883. When obscurity is the default (when defenses depend on lying, or on the attacker not knowing how they work), attackers \emph{eventually} learn that escalating violence pays. Where an anti-obscure, i.e.\ transparent, system leaves the stash operationally out of reach, attackers learn that the attack is futile. Two papers by the founder formalize this:
+\begin{itemize}
+    \item \textbf{\href{\drurl}{The Deadly Race}} (Zenodo, DOI \href{\drurl}{10.5281/zenodo.22018891}): how some self-custody protocols inadvertently give wrench attackers an incentive to kill their victims as means to eliminate a racer to the stash.
+    \item \textbf{\href{\dsurl}{The Denial Spiral}} (Zenodo, DOI \href{\dsurl}{10.5281/zenodo.22778480}): why defenses built on denial escalate the attack instead of ending it.
+\end{itemize}
 Great Wall makes forcing a user to give up their assets close to impossible.
 
 We envision a future where customers can move from hiding in fear to declaring their security with loud, proud confidence.
@@ -19,8 +25,10 @@ Our solution is a novel protocol we call \textbf{Tacit Knowledge-Based Authentic
     \item \textbf{Coercion Resistance:} The protocol's architecture (requiring both time and tacit knowledge) renders it effectively impossible for an attacker to gain access by force, neutralizing the \$5 wrench attack.
 \end{itemize}
 
+The protocol ships in two deployments (Section~\ref{sec:deployments}). The four properties above describe the \emph{self-custodial} deployment. The \emph{custodial} deployment, licensed to banks, brings the same recognition-plus-delay mechanism to people who keep their money with an institution. See the \href{\demourl}{walk-through demo} and the \href{\appurl}{app's repository}.
+
 \textbf{Differentials:} \par
-This unique combination of four properties sets Great Wall apart from all existing solutions, each of which suffers from a critical, and often dangerous, flaw.
+Alternatives exist that deliver individual custody, but none combines it with the other three properties. This unique combination of four properties sets Great Wall apart from all existing solutions, each of which suffers from a critical, and often dangerous, flaw.
 
 \par\medskip\noindent
 \resizebox{\textwidth}{!}{%
@@ -36,24 +44,23 @@ Vanilla Custody & \emojicheck & \emojicheck & \emojicheck & \emojicross & hardwa
 }
 \par\medskip
 
-\textbf{Monetization:} \par
-We are capturing this market via a high-margin subscription marketplace connecting Users (who need security) with Providers (who sell idle computation).
-
-Our marketplace's growth is fueled by a provider-driven referral program. Providers are incentivized via affiliate commission to act as a highly-motivated, zero-base-cost sales force. They naturally recruit Users, creating a powerful and scalable growth engine that dramatically lowers our Customer Acquisition Cost (CAC).
+\textbf{Monetization: three revenue streams} \par
+\begin{enumerate}
+    \item \textbf{Licensing to banks (B2B, custodial).} Banks and fintechs license the software and run everything on their side: license, seat and integration fees. Serviceable market: \$\num[round-precision=1]{\revSamSegTwoM}M across \numint{\samSegTwoInstitutions} institutions in Latin America. Brazil's central bank already caps night-time Pix transfers: the regulator has conceded that delay is the countermeasure. The largest stream, with a 12--18 month sales cycle.
+    \item \textbf{Self-custody marketplace (B2C).} The user owns everything and pays for convenience. Through \textbf{Flying Turtle}, users pay \emph{anonymously} to have their time-lock puzzle solved by Providers on idle compute; we take a \markPlatformFeePercent\% platform fee. Providers earn a referral commission on the clients they recruit, which makes them a zero-base-cost sales force. Serviceable market: \$\num[round-precision=1]{\revSamSegOneM}M. This is the only stream in the Year 1--3 financial model.
+    \item \textbf{Education (B2C).} Paid live cohorts on coercion-resistant self-custody, launched from a free master class at \href{\anarcurl}{Anarcópolis} on \masterclassDate. Small revenue; it proves people pay and feeds the other two streams.
+\end{enumerate}
 
 \textbf{Loud, Proud Apparel (Hybrid Model):} \par
-A two-tiered approach combining deterrent marketing with community engagement. Primary deterrent items (stickers/decals) are given away as marketing expenses to maximize adoption and create the ``yard sign'' network effect. Premium apparel is available through a separate ``Superfan Store'' for revenue generation. This serves as bonus revenue excluded from primary financial projections.
-
-We believe this will create a virtuous cycle of loud, proud community confidence, exponential growth, brand loyalty, and market dominance.
+A two-tiered approach combining deterrent marketing with community engagement. Primary deterrent items (cards, stickers, decals) are given away as marketing expenses to maximize adoption and create the ``yard sign'' network effect. Premium apparel is available through a separate ``Superfan Store.'' This is bonus revenue, excluded from the financial projections.
 
 \textbf{The investment opportunity:} \par
-We are seeking a \$\numint{round(\seedAmount/1000,0)}K seed round to launch and scale the marketplace platform toward a \$\num{\targetValHigh}M valuation by Year 3.
+\textbf{Now --- pre-seed:} up to \$\numint{\preseedCap/1000}K at a \$\numint{\preseedValuation/1000000}M post-money valuation (e.g.\ \$\numint{\preseedExampleTicket/1000}K = \numint{\preseedExampleTicket/\preseedValuation*100}\%), convertible into equity on incorporation. It funds the course, the Flying Turtle release and incorporation.
+\textbf{Next --- seed:} \$\numint{round(\seedAmount/1000,0)}K for \numint{\seedEquity}\% at \$\numfpeval{round(\seedValuation/1000000,1)}M post-money: \numint{\seedRunwayMonths} months of runway to build the team, the custodial integration and the first bank pilot, toward a \$\num{\targetValHigh}M valuation by Year 3. See Section~\ref{sec:funding}.
 
 \paragraph{Near-Term Timeline}
 \begin{itemize}
-  \item MVP Ready --- \mvpDate
-  \item First \numint{\betaFirstClients} Beta Clients --- \betaTenDate
-  \item End of Beta (\numint{\betaEndClients} Clients) --- \betaEndDate
-  \item Scale Marketing / Hire CMO --- \scaleMktDate
-  \item \numint{\betaUsers} Customers --- \kCustomersDate
+  \item Master class and pilot course --- \masterclassDate
+  \item Flying Turtle release --- \flyingTurtleDate
+  \item Custodial product and first bank pilot --- funded by the seed
 \end{itemize}

@@ -3,14 +3,14 @@
 \thispagestyle{empty}
 
 \begin{center}
-\Large\textbf{Great Wall: Making Self-Custody Safe for the Mainstream}\\[0.3em]
-{\small One-Page Summary}
+\Large\textbf{Great Wall: Coercion-Resistant Authentication}\\[0.3em]
+{\small One-Page Summary \quad$\bullet$\quad \href{\demourl}{Walk-through demo} \quad$\bullet$\quad \href{\appurl}{App}}
 \end{center}
 
 \vfill
 
 \noindent\textbf{The Problem}\quad
-The rise of ``Not your keys, not your coins'' has created a paradox: self-custody users are increasingly vulnerable to physical coercion---the ``\$5 wrench attack.'' In 2025, wrench attacks surged to record levels, and obscurity-based defenses can backfire catastrophically, incentivizing attackers toward greater violence.
+The public registry of physical attacks on Bitcoin holders lists \textbf{\attacksTotal} cases (\attacksAsOf), with a record \attacksRecordYearCount{} in \attacksRecordYear. \textbf{About 1 in 25 ends with someone dead}, and \attacksAbductNow\% of \attacksRecordYear's attacks involved abduction or captivity, up from \attacksAbductThen\% in 2021. When obscurity is the default, attackers \emph{eventually} learn that escalating violence pays (\href{\drurl}{The Deadly Race}; \href{\dsurl}{The Denial Spiral}).
 
 \vfill
 
@@ -22,19 +22,23 @@ Great Wall's TKBA protocol---free software under MIT/Apache-2.0---is the \textbf
     \item \textbf{Anti-Obscure:} Security \textit{increases} as attackers learn the protocol
     \item \textbf{Coercion-Resistant:} Requires time + tacit knowledge, neutralizing wrench attacks
 \end{itemize}
+The same mechanism, licensed to banks, protects customers who keep their money with an institution.
 
 \vfill
 
-\noindent\textbf{Business Model}\\
-A high-margin subscription marketplace connecting \textbf{Clients} (users needing anonymous, memory-intensive computation) with \textbf{Providers} (PC owners monetizing idle capacity via aggressive referral commission). Providers act as a zero-base-cost sales force, driving viral growth and dramatically lowering CAC.
+\noindent\textbf{Business Model: Three Revenue Streams}
+\begin{itemize}[nosep,leftmargin=1.5em]
+    \item \textbf{Licensing to banks (B2B):} custodial TKBA; serviceable market \$\num[round-precision=1]{\revSamSegTwoM}M across \numint{\samSegTwoInstitutions} institutions.
+    \item \textbf{Self-custody marketplace (B2C):} users pay anonymously, via Flying Turtle, to have their time-lock solved; serviceable market \$\num[round-precision=1]{\revSamSegOneM}M. The only stream in the Year 1--3 model.
+    \item \textbf{Education (B2C):} paid live cohorts, launched at \href{\anarcurl}{Anarcópolis} on \masterclassDate.
+\end{itemize}
 
 \vfill
 
-\noindent\textbf{Key Metrics}
+\noindent\textbf{Key Metrics} {\small (self-custody marketplace model)}
 \begin{center}
 \begin{tabular}{ll|ll}
-\textbf{LTV:CAC Ratio} & \numint{\ltvCacRatio}:1 & \textbf{Gross Margin} & \num{\subGrossMargin}\% \\
-\textbf{CAC Payback} & \num{\subPaybackMonths} months & \textbf{Platform Fee} & \markPlatformFeePercent\% \\
+\textbf{Gross Margin} & \num{\subGrossMargin}\% & \textbf{Platform Fee} & \markPlatformFeePercent\% \\
 \textbf{Year 3 Exit ARR} & \$\numfpeval{round(\subARRYearThree/1000000,1)}M & \textbf{Breakeven} & Month \numint{\breakevenMonth} \\
 \end{tabular}
 \end{center}
@@ -44,19 +48,21 @@ A high-margin subscription marketplace connecting \textbf{Clients} (users needin
 \noindent\textbf{Investment Opportunity}
 \begin{center}
 \begin{tabular}{lrll}
-\textbf{Seed Round} & \$\numint{round(\seedAmount/1000,0)}K & @ \$\numfpeval{round(\seedValuation/1000000,1)}M post-money & (\numint{\seedRunwayMonths}-month runway) \\
-\textbf{Series A (M18)} & \$\numint{\seriesAAmount/1000000}M & @ \$\numfpeval{round(\seriesAValuation/1000000,1)}M post-money & (Scale marketplace) \\
+\textbf{Pre-seed (now)} & up to \$\numint{\preseedCap/1000}K & @ \$\numint{\preseedValuation/1000000}M post-money & (e.g.\ \$\numint{\preseedExampleTicket/1000}K = \numint{\preseedExampleTicket/\preseedValuation*100}\%) \\
+\textbf{Seed} & \$\numint{round(\seedAmount/1000,0)}K & @ \$\numfpeval{round(\seedValuation/1000000,1)}M post-money & (\numint{\seedRunwayMonths}-month runway) \\
+\textbf{Series A (M18)} & \$\numint{\seriesAAmount/1000000}M & @ \$\numfpeval{round(\seriesAValuation/1000000,1)}M post-money & (Scale) \\
 \textbf{Target (Y3)} & & \$\num{\targetValLow}--\num{\targetValHigh}M valuation & \\
 \end{tabular}
 \end{center}
+{\small Pre-seed converts into equity on incorporation.}
 
 \vfill
 
 \noindent\textbf{Why Now}
 \begin{itemize}[nosep,leftmargin=1.5em]
-    \item Record wrench attacks in 2025 creating urgent market demand
-    \item First-mover advantage in anonymous computation marketplace
-    \item Capital-efficient, provider-driven growth engine with strong unit economics
+    \item Record wrench attacks in \attacksRecordYear, increasingly deadly
+    \item Brazil's central bank already mandates delay against coerced transfers: the regulator has conceded the countermeasure
+    \item Founder: author of Bitcoin \href{\bipurl}{BIP-450} and of two papers on the wrench attack, starting a doctorate on the subject
 \end{itemize}
 
 \vfill
