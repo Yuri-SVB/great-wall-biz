@@ -11,13 +11,9 @@
 
 \section{Market Opportunity}
 
-The previous version of this section summed four heterogeneous populations---%
-Bitcoin holders, password-manager users, physical-vault owners and private-security
-customers---into a single \numint{9000000}-person ``subscriber'' market. That sum was
-dimensionally meaningless: it added people who would buy four different products, at
-four different prices, through four different channels. It has been replaced by three
-segments, each with its own unit of count, its own ARPU and its own penetration
-assumption. \textbf{The three headcounts are never added together.} The only quantity
+The market is sized as three segments, each with its own unit of count, its own
+ARPU and its own penetration assumption: they would buy different products, at
+different prices, through different channels. \textbf{The three headcounts are never added together.} The only quantity
 that is legitimately comparable across them is annual platform revenue in dollars.
 
 \subsection{Segment Structure}
@@ -62,15 +58,15 @@ S3 & \numint{\targetShareSegThree}\% \textit{(illustrative)} & \numint{\targetCo
     \numint{\targetSubsSegOne} figure is \emph{exactly} the Year~3 subscriber count
     produced by the financial model
     (marketing budget $\div$ CAC, less churn), and \$\num[round-precision=1]{\revPlanSegOneM}M
-    is \emph{exactly} \texttt{subARRYearThree}. Market sizing and the P\&L can no
-    longer drift apart: the share is computed as
+    is \emph{exactly} the model's Year~3 exit ARR. Market sizing and the P\&L cannot
+    drift apart: the share is computed as
     \numint{\targetSubsSegOne}~/~\numint{\samSegOneIndividuals}, not chosen.
   \item \textbf{S2 and S3 contribute \$0 to the Year~1--3 projections.} The
     \$\num[round-precision=1]{\revUpsideExcludedM}M attributable to them at the
     illustrative penetrations above is upside that is deliberately excluded from
     every revenue, COGS, gross-margin, LTV and valuation figure in this document.
     Their unit economics differ structurally from S1 (see below), and blending them
-    into a single ARPU would reintroduce exactly the error this restructure removes.
+    into a single ARPU would mix incomparable units.
 \end{itemize}
 
 % TODO(SOURCE): the 34.3% figure is arithmetic, but the TENSION it exposes is real
@@ -100,9 +96,7 @@ user's own multi-day solve into the protocol's minimum delay.
 \begin{itemize}[nosep]
   \item \textbf{Population: \numint{\tamSegOneIndividuals} individuals}, holding an
     average of \$\numint{\tamSegOneAvgHoldingUsd} for roughly
-    \$\numint{\tamSegOneAumBn}bn of protected assets. This replaces the previous
-    unsourced \numint{3000000} ``Bitcoin users'' figure and is consistent with the
-    companion economics paper.
+    \$\numint{\tamSegOneAumBn}bn of protected assets.
   \item \textbf{Derivation.} No source publishes a count of \emph{individuals}
     holding more than \$100{,}000 in Bitcoin. Henley~\& Partners count
     \numint{145100} Bitcoin millionaires worldwide\cite{henley2025crypto}; scaling
@@ -507,7 +501,7 @@ The year 2025 witnessed three seemingly unrelated developments:
 
 While the causal links between these events remain unproven, a plausible narrative emerges: both large and small crypto holders, increasingly viewing ownership as a security liability, may be diversifying into physical assets. The reasoning is straightforward: if holding cryptocurrency incurs substantial security costs (vaults, alarms, surveillance, armed protection) and usage friction (displacement to sites of custody, extra authentication steps, reduced portability), one might as well bear those costs for precious metals instead, thereby eliminating the technological complexity inherent to crypto custody.
 
-Notably, any such capital flight would likely remain invisible in public data. Holders motivated by security concerns would execute these transitions discretely precisely because, to them, security through obscurity appears paramount given the gravity and persistence of the wrench attack threat. This suggests the observable trend may significantly understate the actual magnitude of the shift. Additionally, that explanation also suggests an \href{https://en.wikipedia.org/wiki/Anosognosia}{\textit{anosognostic}} mechanism: the problem, by its nature, causes individuals to prefer, for their own security, not to talk about it, which impedes accurate diagnose and potential treatments --- the exact conditions for ``you didn't know you needed it'' innovations.
+Notably, any such capital flight would likely remain invisible in public data. Holders motivated by security concerns would execute these transitions discreetly precisely because, to them, security through obscurity appears paramount given the gravity and persistence of the wrench attack threat. This suggests the observable trend may significantly understate the actual magnitude of the shift. Additionally, that explanation also suggests an \href{https://en.wikipedia.org/wiki/Anosognosia}{\textit{anosognostic}} mechanism: the problem, by its nature, causes individuals to prefer, for their own security, not to talk about it, which impedes accurate diagnosis and potential treatments --- the exact conditions for ``you didn't know you needed it'' innovations.
 
 This dynamic represents a significant tailwind for Great Wall. Rather than abandoning cryptocurrency, holders can retain the benefits of digital assets while neutralizing the security concerns that would otherwise drive them toward traditional stores of value.
 

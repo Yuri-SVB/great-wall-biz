@@ -32,7 +32,7 @@
 };
 \end{axis}
 \end{tikzpicture}
-\caption{Exit ARR Growth: \numfpeval{round(\growthRateYearOneTwo,0)}\% (Y1$\rightarrow$Y2) and \numfpeval{round(\growthRateYearTwoThree,0)}\% (Y2$\rightarrow$Y3)}
+\caption{Exit ARR Growth: \numint{\growthRateYearOneTwo}\% (Y1$\rightarrow$Y2) and \numint{\growthRateYearTwoThree}\% (Y2$\rightarrow$Y3)}
 \end{figure}
 
 \subsection{Revenue Projections - Exit ARR vs Actual Revenue}
@@ -129,9 +129,9 @@ Marketing & \numint{\marketingBudgetYearOne} & \numint{\marketingBudgetYearTwo} 
     enlarge x limits=0.3,
 ]
 \addplot[fill=red!50, draw=red!70] coordinates {
-    (Year 1, \fpeval{\operatingIncomeYearOne/1000}) [(\$\numfpeval{round(\operatingIncomeYearOne/1000,0)}k)]
-    (Year 2, \fpeval{\operatingIncomeYearTwo/1000}) [(\$\numfpeval{round(\operatingIncomeYearTwo/1000,0)}k)]
-    (Year 3, \fpeval{\operatingIncomeYearThree/1000}) [\$\numfpeval{round(\operatingIncomeYearThree/1000,0)}k]
+    (Year 1, \fpeval{\operatingIncomeYearOne/1000}) [(\$\numint{abs(\operatingIncomeYearOne)/1000}k)]
+    (Year 2, \fpeval{\operatingIncomeYearTwo/1000}) [(\$\numint{abs(\operatingIncomeYearTwo)/1000}k)]
+    (Year 3, \fpeval{\operatingIncomeYearThree/1000}) [\$\numint{\operatingIncomeYearThree/1000}k]
 };
 \end{axis}
 \end{tikzpicture}
