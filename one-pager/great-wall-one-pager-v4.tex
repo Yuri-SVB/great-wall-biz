@@ -1,0 +1,129 @@
+% great-wall-one-pager-biz.tex — one-page business description of Great Wall.
+% Market and round figures are single-sourced from ../values/variables.tex
+% (same as ../pitch/pitch-5min.tex). Do not restate them here.
+\documentclass[10pt]{article}
+
+% Packages
+\usepackage[a4paper,margin=0.6in,top=0.55in,bottom=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath}\sansmath
+\usepackage{enumitem}
+\setlist{itemsep=1pt,topsep=2pt,parsep=0pt,leftmargin=1.4em}
+\usepackage{xfp}
+\usepackage{siunitx}
+\sisetup{mode=text, group-minimum-digits=3, group-separator={,},
+         round-mode=places, round-precision=2}
+\newcommand{\numint}[1]{\num[round-precision=0]{\fpeval{#1}}}
+
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+
+% Financial model — the single source of truth.
+\input{../values/variables}
+
+% Pre-seed terms (early-supporter price, before the seed in values/variables.tex)
+\newcommand{\preseedCap}{50000}
+\newcommand{\preseedValuation}{1000000}
+\newcommand{\preseedExampleTicket}{10000}
+
+% Links
+\newcommand{\siteurl}{https://loudproudandfree.com}
+\newcommand{\courseurl}{https://yuri-svb.github.io/}
+\newcommand{\demourl}{https://www.youtube.com/watch?v=Ry9wzHq1wOA}
+\newcommand{\drurl}{https://zenodo.org/doi/10.5281/zenodo.22018891}  % The Deadly Race (concept DOI)
+\newcommand{\dsurl}{https://doi.org/10.5281/zenodo.22778480}         % The Denial Spiral
+\newcommand{\appurl}{https://github.com/Yuri-SVB/great-wallet}
+\newcommand{\anarcurl}{https://fraguismo.org/anarcopolis/}
+\newcommand{\bipurl}{https://github.com/bitcoin/bips/blob/master/bip-0450.mediawiki}
+\newcommand{\bizurl}{https://github.com/Yuri-SVB/great-wall-biz/blob/main/great-wall-executive-summary.pdf}
+\newcommand{\registryurl}{https://github.com/jlopp/physical-bitcoin-attacks}
+\newcommand{\kprinciple}{https://en.wikipedia.org/wiki/Kerckhoffs's_principle}
+
+% Registry figures (jlopp/physical-bitcoin-attacks @ 3eaa827, 1 Nov 2026;
+% same source and method as ../masterclass). The registry roughly doubled in
+% mid-October 2026, so older figures (344, 351) are not comparable.
+\newcommand{\regAsOf}{1 Nov 2026}
+\newcommand{\regTotal}{801}
+\newcommand{\regYearMax}{170}   % 2025, a record
+\newcommand{\regKilled}{32}     % read individually
+\newcommand{\regBrazil}{39}
+\newcommand{\regAbdNow}{41\%}   % 2025, keyword coding: 70 of 170
+\newcommand{\regAbdThen}{18\%}  % 2021: 16 of 87
+
+% Colors
+\definecolor{accent}{RGB}{247, 147, 26}
+
+% Section header
+\newcommand{\gwsection}[2][]{%
+  \par\vspace{0.11cm}
+  {\color{accent}\hrule}\vspace{0.12cm}
+  \noindent{\large\textbf{#2}}\hfill{\small #1}\par
+  \vspace{0.08cm}{\color{accent}\hrule}\vspace{0.14cm}
+  \noindent\ignorespaces}
+
+% Document
+\begin{document}
+\pagestyle{empty}
+
+% Title Section
+\begin{center}
+  \vspace*{-1.1cm}
+  {\huge\bfseries\color{accent} Great Wall: Coercion-Resistant Authentication}\\[0.6ex]
+  {\large\itshape You cannot be forced to hand over something you cannot describe.}\\[0.6ex]
+  {\small Walk-through demo: \href{\demourl}{\texttt{youtube.com/watch?v=Ry9wzHq1wOA}}}
+\end{center}
+
+\gwsection[{\href{\registryurl}{Lopp registry}, \regAsOf}]{The Problem: Wrench Attacks Are Rising, and Turning Deadly}
+The public registry of physical attacks on Bitcoin holders lists \textbf{\regTotal} cases, with a record \textbf{\regYearMax} in 2025 and \regBrazil{} in Brazil. \textbf{About 1 in 25 ends with someone dead} (\regKilled{} of \regTotal), and \textbf{\regAbdNow{} of 2025's attacks involved abduction or captivity}, up from \regAbdThen{} in 2021. Press-sourced, so a floor, not a census.
+
+\vspace{0.1cm}
+\noindent The community's answer has been \emph{``don't tell anyone.''} Obscurity is not a mechanism: it is a bet that the attacker does not know something you do, and \href{\kprinciple}{Kerckhoffs} settled that in 1883. When obscurity is the default (when defenses depend on lying, or on the attacker not knowing how they work), attackers eventually learn that escalating violence pays. Where an anti-obscure, i.e.\ transparent, system leaves the stash operationally out of reach, attackers learn that the attack is futile. Our two papers, each citable by DOI, formalize this:
+\begin{itemize}
+  \item \textbf{\href{\drurl}{The Deadly Race}} (Zenodo, DOI \href{\drurl}{10.5281/zenodo.22018891}): how some self-custody protocols inadvertently give wrench attackers an incentive to kill their victims as means to eliminate a racer to the stash.
+  \item \textbf{\href{\dsurl}{The Denial Spiral}} (Zenodo, DOI \href{\dsurl}{10.5281/zenodo.22778480}): why defenses built on denial escalate the attack instead of ending it.
+\end{itemize}
+
+\gwsection{The Solution: Recognition, Not Recall, Behind a Delay}
+Our protocol is \textbf{TGPO, the Time-Gated Perceptual Oracle}, and the property it delivers is \textbf{TKBA (Tacit Knowledge-Based Authentication)}. You authenticate by \emph{recognizing} something you cannot describe, so there is nothing to write down and nothing to hand over; a mandated delay means a captive cannot be turned into an immediate transfer. Security is \emph{anti-obscurity}: it does not depend on the attacker being ignorant of it. \textbf{One protocol, two deployments}, differing only in who counts failed attempts:
+\begin{itemize}
+  \item \textbf{Custodial ($2^{16}$):} the bank counts guesses and freezes the account, as it already does for PINs. Four palettes of sixteen \textbf{faces}, reshuffled each use: 65,536 combinations against 10,000 for a 4-digit PIN, and easier to remember. The custodian synthesizes everything server-side.
+  \item \textbf{Self-custodial ($2^{160}$):} nobody counts guesses against your own encrypted seed, so the secret must be high-entropy, derived on your own device from fractal maps, behind a time-lock puzzle.
+\end{itemize}
+Anti-obscurity also flips the culture of fear into \textbf{``Loud, Proud, and Free''}: an educated attacker knows the attack cannot succeed, so our cards and apparel work like an alarm company's yard sign.
+
+\gwsection[\href{\bizurl}{Full business model (PDF)}]{The Business: Three Revenue Streams}
+\begin{enumerate}
+  \item \textbf{Self-custody (B2C) --- first by readiness.} Half-built, crypto-native. The user owns everything and pays for convenience. \textbf{Flying Turtle} lets users pay \emph{anonymously} to have their time-lock puzzle solved by Providers on idle compute; we take a platform fee. Serviceable market: \textbf{\$\num[round-precision=1]{\revSamSegOneM}M}.
+  \item \textbf{Licensing to banks (B2B, custodial) --- largest by size.} Banks and fintechs license the software and run everything on their side; license, seat and integration fees. Serviceable market: \textbf{\$\num[round-precision=1]{\revSamSegTwoM}M} across \numint{\samSegTwoInstitutions} institutions in Latin America. Brazil's central bank already caps night-time Pix transfers: the regulator has conceded that \textbf{delay} is the countermeasure. No prototype yet: the seed builds it; 12--18 month sales cycle.
+  \item \textbf{Education (B2C) --- the entry point.} Paid live cohorts on coercion-resistant self-custody, launched from a free master class at \textbf{\href{\anarcurl}{Anarcópolis}} (16 Nov 2026). Small revenue; it proves people pay and feeds the other two streams.
+\end{enumerate}
+
+\gwsection{Status, Honestly}
+\begin{itemize}
+  \item \textbf{Self-custodial wallet} (\href{\appurl}{\texttt{github.com/Yuri-SVB/great-wallet}}): public beta. Not yet safe for real funds.
+  \item \textbf{Flying Turtle:} in development, release expected within about a month.
+  \item \textbf{Custodial deployment:} designed, not built --- and the smaller engineering problem.
+  \item \textbf{Company:} no entity and no revenue yet; incorporation on term sheet, in the jurisdiction the round prefers.
+\end{itemize}
+
+\gwsection[Founder]{Why Us}
+Yuri S.\ Villas Boas: author of Bitcoin \textbf{\href{\bipurl}{BIP-450}}; author of \href{\drurl}{The Deadly Race} and \href{\dsurl}{The Denial Spiral}; contributor to the attack registry the model is calibrated on; about to begin a \textbf{doctorate on this subject} at PPGCC.
+
+\gwsection{Near-Term Milestones}
+\textbf{Master class \& pilot course:} 16 Nov 2026 \;$\bullet$\; \textbf{Flying Turtle release:} Dec 2026 \;$\bullet$\; \textbf{First bank pilot:} after the seed
+
+\gwsection[Pre-seed, then seed]{The Ask}
+\textbf{Now --- pre-seed:} up to \textbf{\$\numint{\preseedCap/1000}K} at a \textbf{\$\num[round-precision=0]{\fpeval{\preseedValuation/1000000}}M} post-money valuation (e.g.\ \$\numint{\preseedExampleTicket/1000}K = \numint{\preseedExampleTicket/\preseedValuation*100}\%), convertible into equity on incorporation. Funds the course, the Flying Turtle release and incorporation.\\[2pt]
+\textbf{Next --- seed:} \textbf{\$\numint{\seedAmount/1000}K} for \textbf{\numint{\seedEquity}\%} at a \textbf{\$\num[round-precision=1]{\fpeval{\seedValuation/1000000}}M} post-money valuation: \numint{\HCseedRunwayMonths} months of runway to build the team, the custodial integration and the first bank pilot.
+
+\par\vspace{0.12cm}
+\noindent{\color{accent}\rule{\linewidth}{0.5mm}}\par\vspace{0.06cm}
+\centerline{\href{\demourl}{Demo} \;$\bullet$\; \href{\appurl}{App} \;$\bullet$\; \href{\bizurl}{Business model} \;$\bullet$\; \href{\drurl}{The Deadly Race} \;$\bullet$\; \href{\dsurl}{The Denial Spiral} \;$\bullet$\; \href{\siteurl}{loudproudandfree.com} \;$\bullet$\; \href{\courseurl}{yuri-svb.github.io}}
+
+\end{document}
